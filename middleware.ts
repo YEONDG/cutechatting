@@ -1,9 +1,14 @@
-import NextAuth from 'next-auth';
-import { authConfig } from './auth.config';
+import { getToken } from 'next-auth/jwt';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default NextAuth(authConfig).auth;
+export async function middleware(req: NextRequest) {
+  const token = await getToken({ req });
+
+  if (!token) {
+    return NextResponse.redirect(new URL('/sign-in', req.nextUrl));
+  }
+}
 
 export const config = {
-  // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: ['/r/:path*/submit', '/r/create'],
 };

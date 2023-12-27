@@ -8,8 +8,10 @@ export const Navbar = () => {
         <div>
           <Link href='/'>ganda</Link>
         </div>
-        <div>
+        <div className='flex gap-4'>
           <Link href='/goodbye'>떠나요</Link>
+          <Link href='/sign-in'>로그인</Link>
+          <Link href='/sign-up'>회원가입</Link>
         </div>
       </div>
     </div>
