@@ -1,14 +1,38 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { AnnoyedIcon, Circle, Settings, SparkleIcon } from 'lucide-react';
-import React from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
 
-export const TwChatBottom = () => {
+interface TwChatBottomProps {
+  message: string;
+  setMessage: React.Dispatch<React.SetStateAction<string>>;
+  onSendMessage: (message: string) => void;
+}
+
+export const TwChatBottom = ({
+  message,
+  setMessage,
+  onSendMessage,
+}: TwChatBottomProps) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && message.trim() !== '') {
+      onSendMessage(message);
+      setMessage('');
+    }
+  };
+
   return (
     <div className='h-[90px] w-full'>
       <div className='flex flex-col px-2.5 pb-2.5 gap-2'>
         <div className='relative'>
           <Input
+            value={message}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
             className='pl-10 h-[40px] outline outline-1 outline-slate-300 hover:outline-2 rounded-sm focus-visible:outline-fuchsia-400 focus-visible:outline-4 focus-visible:outline-offset-0'
             placeholder='메시지 보내기'
           />
@@ -24,7 +48,13 @@ export const TwChatBottom = () => {
           </div>
           <div className='flex items-center gap-2'>
             <Settings className='h-5 w-5' />
-            <Button className='h-[30px] w-[46px] text-sm bg-fuchsia-400'>
+            <Button
+              onClick={() => {
+                onSendMessage(message);
+                setMessage('');
+              }}
+              className='h-[30px] w-[46px] text-sm bg-fuchsia-400'
+            >
               채팅
             </Button>
           </div>
