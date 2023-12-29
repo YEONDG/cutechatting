@@ -3,6 +3,10 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/config/site';
 import { Navbar } from '@/components/layout/navbar';
+import Provider from '@/components/provider';
+import { getServerSession } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
+import Providers from '@/components/provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -12,7 +16,7 @@ export const metadata: Metadata = {
   icons: [{ url: 'logo.svg', href: 'logo.svg' }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -20,12 +24,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <div className='h-full bg-slate-100'>
-          <Navbar />
-          <main className='container pt-20 pb-20 h-full bg-slate-100'>
-            {children}
-          </main>
-        </div>
+        <Providers>
+          <div className='h-full bg-slate-100'>
+            <Navbar />
+            <main className='container pt-20 pb-20 h-full bg-slate-100'>
+              {children}
+            </main>
+          </div>
+        </Providers>
       </body>
     </html>
   );

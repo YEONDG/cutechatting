@@ -1,6 +1,11 @@
+'use client';
+
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 const MainPage = () => {
+  const { data } = useSession();
+  console.log(data, 'data입니당');
   return (
     <div className='flex flex-col justify-center items-center h-full'>
       <div className='flex flex-col gap-5 justify-center items-center'>

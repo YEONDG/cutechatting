@@ -4,28 +4,35 @@ import { TwChatHeader } from './tw-chat-header';
 import { TwChatItems } from './tw-chat-items';
 import { TwChatBottom } from './tw-chat-bottom';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { useState } from 'react';
 
-export const TwChatComponent = () => {
-  const [message, setMessage] = useState('');
+interface ChatItem {
+  id: number;
+  message: string;
+}
 
-  const onSendMessage = (message) => {
-    console.log(`Sending message: ${message}`);
-    // 실제로는 여기서 서버로 메시지를 보내거나 다른 작업을 수행할 수 있습니다.
+export const TwChatComponent = () => {
+  const [message, setMessage] = useState<string>('');
+  const [chatList, setChatList] = useState<ChatItem[]>([]);
+
+  const lastChat = chatList.length > 0 ? chatList[0] : null;
+
+  const onSendMessage = (message: string) => {
+    if (message.trim() === '') return;
+
+    const newChat: ChatItem = {
+      id: lastChat ? lastChat.id + 1 : 1,
+      message,
+    };
+    setChatList([newChat, ...chatList]);
   };
-  console.log(message);
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -42,7 +49,7 @@ export const TwChatComponent = () => {
             {/* 헤더 */}
             <TwChatHeader />
             {/* 채팅스크롤 */}
-            <TwChatItems />
+            <TwChatItems chatList={chatList} />
             {/* 채팅 input */}
             <TwChatBottom
               message={message}
