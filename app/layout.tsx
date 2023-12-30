@@ -27,7 +27,7 @@ export default async function RootLayout({
         <Providers>
           <div className='h-full bg-slate-100'>
             <Navbar />
-            <main className='container pt-20 pb-20 h-full bg-slate-100'>
+            <main className='max-w-7xl mx-auto pt-20 pb-20 h-full bg-slate-100'>
               {children}
             </main>
           </div>

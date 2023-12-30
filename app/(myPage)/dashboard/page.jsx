@@ -4,7 +4,6 @@ import React from 'react';
 
 const DashboardPage = async () => {
   const { user } = await getAuthSession();
-  console.log(user, 'session이 뭔디');
   return (
     <div>
       <div>{user.id}</div>

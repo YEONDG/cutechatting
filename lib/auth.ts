@@ -66,7 +66,6 @@ export const authOptions = {
         session.user.image = token.picture;
         session.user.username = token.username;
       }
-      console.log(token);
       return session;
     },
     redirect() {
