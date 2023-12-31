@@ -12,6 +12,9 @@ export async function GET(req: Request) {
     const twitchPosts = await db.twitchPost.findMany({
       skip: (numPage - 1) * 6,
       take: 6,
+      orderBy: {
+        id: 'desc',
+      },
     });
 
     return NextResponse.json(twitchPosts);

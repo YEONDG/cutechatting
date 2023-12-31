@@ -25,11 +25,9 @@ export default async function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <Providers>
-          <div className='h-full bg-slate-100'>
+          <div className='h-full '>
             <Navbar />
-            <main className='max-w-7xl mx-auto pt-20 pb-20 bg-slate-100'>
-              {children}
-            </main>
+            <main className='max-w-7xl mx-auto pt-20 pb-20 '>{children}</main>
           </div>
         </Providers>
       </body>

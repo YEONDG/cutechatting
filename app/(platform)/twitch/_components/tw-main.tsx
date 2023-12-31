@@ -6,27 +6,22 @@ import { db } from '@/lib/db';
 interface TwMainProps {
   page: string;
 }
-const fetchTwitchPosts = async (page: string) => {
-  try {
-    const response = await fetch(
-      `http://localhost:3000/api/twitch?page=${page}`
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const jsonData = await response.json();
-    return jsonData;
-  } catch (error) {
-    console.error('Error in getData:', (error as Error).message);
-    throw error;
+const getTwitchPosts = async (page: string) => {
+  const response = await fetch(`http://localhost:3000/api/twitch?page=${page}`);
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
   }
+  return response.json();
 };
 
 const getTotalPostsCount = async () => {
-  const postsCount = await db.twitchPost.count();
-
-  return postsCount;
+  try {
+    const postsCount = await db.twitchPost.count();
+    return postsCount;
+  } catch (error) {
+    console.error('Error while counting posts:', (error as Error).message);
+    throw new Error('Failed to fetch total posts count.');
+  }
 };
 
 export const TwMain = async ({ page }: TwMainProps) => {
@@ -34,7 +29,7 @@ export const TwMain = async ({ page }: TwMainProps) => {
 
   const totalPostsCount = await getTotalPostsCount();
 
-  const posts: TwitchPost[] = await fetchTwitchPosts(page);
+  const posts: TwitchPost[] = await getTwitchPosts(page);
 
   const startIdx = (pageNumber - 1) * 6;
   const endIdx = startIdx + 6;
