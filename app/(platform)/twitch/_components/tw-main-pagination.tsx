@@ -9,7 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
 
 interface TwMainPagenationProps {
   hasNextPage: boolean;
@@ -22,7 +22,6 @@ export const TwMainPagenation = ({
   hasNextPage,
   postsCount,
 }: TwMainPagenationProps) => {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   const page = searchParams.get('page') ?? '1';
@@ -30,6 +29,10 @@ export const TwMainPagenation = ({
   const numPage = Number(page);
 
   const totalPage = Math.ceil(postsCount / 6);
+
+  if (numPage > totalPage) {
+    redirect('/twitch?page=1');
+  }
 
   return (
     <Pagination>
