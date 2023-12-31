@@ -8,7 +8,7 @@ const TwitchPage = async ({
 }) => {
   const page = searchParams['page'] ?? '1';
   return (
-    <div className='flex flex-col h-full gap-5'>
+    <div className='flex flex-col gap-5'>
       <TwHeader />
       <TwMain page={page} />
     </div>
