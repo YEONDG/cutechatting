@@ -51,7 +51,7 @@ export const TwMainCard = ({ id, title, content }: TwMainCardProps) => {
       <p className='text-xs text-center'>{content}</p>
       <div className='py-1 text-md'>태그</div>
       <div className='flex items-center'>
-        <CopyToClipboard text={'복사하기'} onCopy={onCopySuccess}>
+        <CopyToClipboard text={content ?? ''} onCopy={onCopySuccess}>
           <Button variant='default' className='w-24 h-8'>
             <ClipboardCopy />
             Copy
