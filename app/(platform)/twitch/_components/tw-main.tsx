@@ -6,46 +6,56 @@ import { db } from '@/lib/db';
 interface TwMainProps {
   page: string;
 }
-const getData = async (page: string) => {
-  const data = await fetch(`http://localhost:3000/api/twitch?page=${page}`);
-  const json = await data.json();
-  return json;
+const fetchTwitchPosts = async (page: string) => {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/twitch?page=${page}`
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const jsonData = await response.json();
+    return jsonData;
+  } catch (error) {
+    console.error('Error in getData:', (error as Error).message);
+    throw error;
+  }
 };
 
-const getTotalPosts = async () => {
+const getTotalPostsCount = async () => {
   const postsCount = await db.twitchPost.count();
 
   return postsCount;
 };
 
 export const TwMain = async ({ page }: TwMainProps) => {
-  const numPage = Number(page);
+  const pageNumber = Number(page);
 
-  const postsCount = await getTotalPosts();
+  const totalPostsCount = await getTotalPostsCount();
 
-  const data: TwitchPost[] = await getData(page);
+  const posts: TwitchPost[] = await fetchTwitchPosts(page);
 
-  const start = (numPage - 1) * 6;
-  const end = start + 6;
-  console.log(end, 'end');
+  const startIdx = (pageNumber - 1) * 6;
+  const endIdx = startIdx + 6;
 
   return (
     <div className='flex flex-col justify-center'>
       <div className='flex flex-wrap w-full h-full gap-4'>
-        {data?.map((entry) => (
+        {posts?.map((post) => (
           <TwMainCard
-            key={entry.id}
-            id={entry.id}
-            title={entry.title}
-            content={entry.content}
+            key={post.id}
+            id={post.id}
+            title={post.title}
+            content={post.content}
           />
         ))}
       </div>
       <div className='p-10'>
         <TwMainPagenation
-          hasNextPage={end < postsCount}
-          hasPrevPage={start > 0}
-          postsCount={postsCount}
+          hasNextPage={endIdx < totalPostsCount}
+          hasPrevPage={startIdx > 0}
+          postsCount={totalPostsCount}
         />
       </div>
     </div>
