@@ -2,20 +2,23 @@ import { TwMainPagenation } from './tw-main-pagination';
 import { TwMainCard } from './tw-main-card';
 import { getAuthSession } from '@/lib/auth';
 import { getTotalPostsCount } from '@/actions/actions';
-import type { TwitchPostWithLikes } from '@/types/types';
+import type { TwitchPostWithLikesTags } from '@/types/types';
 
 interface TwMainProps {
   page: string;
+  popular: string;
 }
-const getTwitchPosts = async (page: string) => {
-  const response = await fetch(`http://localhost:3000/api/twitch?page=${page}`);
+const getTwitchPosts = async (page: string, popular: string) => {
+  const response = await fetch(
+    `http://localhost:3000/api/twitch?page=${page}&popular=${popular}`
+  );
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
   return response.json();
 };
 
-export const TwMain = async ({ page }: TwMainProps) => {
+export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
   const session = await getAuthSession();
   const userId = session?.user.id;
 
@@ -23,7 +26,8 @@ export const TwMain = async ({ page }: TwMainProps) => {
 
   const totalPostsCount = await getTotalPostsCount();
 
-  const posts: TwitchPostWithLikes[] = await getTwitchPosts(page);
+  const posts: TwitchPostWithLikesTags[] = await getTwitchPosts(page, popular);
+
   const startIdx = (pageNumber - 1) * 6;
   const endIdx = startIdx + 6;
 
@@ -36,8 +40,9 @@ export const TwMain = async ({ page }: TwMainProps) => {
             id={post.id}
             title={post.title}
             content={post.content}
-            likes={post.likes}
             userId={userId}
+            likes={post.likes}
+            tags={post.tags}
           />
         ))}
       </div>

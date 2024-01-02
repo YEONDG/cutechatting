@@ -7,10 +7,12 @@ const TwitchPage = async ({
   searchParams: { [key: string]: string | undefined };
 }) => {
   const page = searchParams['page'] ?? '1';
+  const popular = searchParams['popular'] ?? 'false';
+  console.log(popular);
   return (
     <div className='flex flex-col gap-5'>
       <TwHeader />
-      <TwMain page={page} />
+      <TwMain page={page} popular={popular} />
     </div>
   );
 };

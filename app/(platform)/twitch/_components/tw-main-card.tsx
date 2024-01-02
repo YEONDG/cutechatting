@@ -1,29 +1,31 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ClipboardCopy } from 'lucide-react';
-import { Heart } from 'lucide-react';
+import { ClipboardCopy, ThumbsUp } from 'lucide-react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { toast } from 'sonner';
 
-import type { Like } from '@prisma/client';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { TagItem } from '@/components/tag-item';
+import type { Like, Tag } from '@prisma/client';
 
 interface TwMainCardProps {
   id: number;
   title: string;
   content: string | null;
-  likes?: Like[];
   userId?: string;
+  likes?: Like[];
+  tags?: Tag[];
 }
 
 export const TwMainCard = ({
   id,
   title,
   content,
-  likes = [],
   userId,
+  likes = [],
+  tags = [],
 }: TwMainCardProps) => {
   const [copy, setCopy] = useState(false);
   const [isLiked, setIsLiked] = useState(
@@ -76,13 +78,12 @@ export const TwMainCard = ({
         <Button
           onClick={() => handleLikeClick(id)}
           variant='ghost'
-          className={cn('flex items-center hover:bg-red-500', {
+          className={cn('flex items-center gap-2 hover:bg-red-500', {
             'bg-red-500': isLiked,
           })}
         >
-          {likeCount}
-          <Heart className='w-6 h-6' />
-          좋아요
+          <ThumbsUp className='w-6 h-6' />
+          좋아요 {likeCount}
         </Button>
       </div>
       <div className='flex gap-4'>
@@ -90,7 +91,11 @@ export const TwMainCard = ({
         <div>23-12-28 11:09</div>
       </div>
       <p className='text-xs text-center'>{content}</p>
-      <div className='py-1 text-md'>태그</div>
+      <div className='flex m-2'>
+        {tags.map((tag) => (
+          <TagItem key={tag.id} name={tag.name} />
+        ))}
+      </div>
       <div className='flex items-center'>
         <CopyToClipboard text={content ?? ''} onCopy={onCopySuccess}>
           <Button variant='default' className='w-24 h-8'>
