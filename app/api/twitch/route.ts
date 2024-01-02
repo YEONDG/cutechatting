@@ -7,13 +7,17 @@ export async function GET(req: Request) {
 
     const page = searchParams.get('page') ?? '1';
 
-    const numPage = Number(page);
+    const pageNumber = Number(page);
 
     const twitchPosts = await db.twitchPost.findMany({
-      skip: (numPage - 1) * 6,
+      skip: (pageNumber - 1) * 6,
       take: 6,
       orderBy: {
         id: 'desc',
+      },
+      include: {
+        likes: true,
+        tags: true,
       },
     });
 

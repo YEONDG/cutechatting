@@ -1,7 +1,8 @@
 import { TwMainPagenation } from './tw-main-pagination';
 import { TwMainCard } from './tw-main-card';
-import { TwitchPost } from '@prisma/client';
-import { db } from '@/lib/db';
+import { getAuthSession } from '@/lib/auth';
+import { getTotalPostsCount } from '@/actions/actions';
+import type { TwitchPostWithLikes } from '@/types/types';
 
 interface TwMainProps {
   page: string;
@@ -14,23 +15,15 @@ const getTwitchPosts = async (page: string) => {
   return response.json();
 };
 
-const getTotalPostsCount = async () => {
-  try {
-    const postsCount = await db.twitchPost.count();
-    return postsCount;
-  } catch (error) {
-    console.error('Error while counting posts:', (error as Error).message);
-    throw new Error('Failed to fetch total posts count.');
-  }
-};
-
 export const TwMain = async ({ page }: TwMainProps) => {
+  const session = await getAuthSession();
+  const userId = session?.user.id;
+
   const pageNumber = Number(page);
 
   const totalPostsCount = await getTotalPostsCount();
 
-  const posts: TwitchPost[] = await getTwitchPosts(page);
-
+  const posts: TwitchPostWithLikes[] = await getTwitchPosts(page);
   const startIdx = (pageNumber - 1) * 6;
   const endIdx = startIdx + 6;
 
@@ -43,6 +36,8 @@ export const TwMain = async ({ page }: TwMainProps) => {
             id={post.id}
             title={post.title}
             content={post.content}
+            likes={post.likes}
+            userId={userId}
           />
         ))}
       </div>

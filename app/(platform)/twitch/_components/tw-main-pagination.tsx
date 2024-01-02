@@ -1,4 +1,7 @@
 'use client';
+
+import { redirect, useSearchParams } from 'next/navigation';
+
 import { Button } from '@/components/ui/button';
 import {
   Pagination,
@@ -9,7 +12,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import { redirect, useRouter, useSearchParams } from 'next/navigation';
 
 interface TwMainPagenationProps {
   hasNextPage: boolean;
@@ -68,16 +70,6 @@ const PageNumbers = ({
   totalPage: number;
   currentPage: number;
 }) => {
-  const firstPage = (
-    <PageNumber key={1} page={1} isActive={currentPage === 1} />
-  );
-  const lastPage = (
-    <PageNumber
-      key={totalPage}
-      page={totalPage}
-      isActive={currentPage === totalPage}
-    />
-  );
   const pages = [];
 
   const startPage = Math.max(2, currentPage - 1);
@@ -87,6 +79,17 @@ const PageNumbers = ({
   const lastDots =
     endPage < totalPage - 1 ? <PaginationEllipsis key='dots2' /> : null;
 
+  const firstPage = (
+    <PageNumber key={1} page={1} isActive={currentPage === 1} />
+  );
+  const lastPage =
+    totalPage === 1 ? null : (
+      <PageNumber
+        key={totalPage}
+        page={totalPage}
+        isActive={currentPage === totalPage}
+      />
+    );
   for (let i = startPage; i <= endPage; i++) {
     pages.push(<PageNumber key={i} page={i} isActive={i === currentPage} />);
   }

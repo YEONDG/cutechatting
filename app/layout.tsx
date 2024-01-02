@@ -7,6 +7,7 @@ import Provider from '@/components/provider';
 import { getServerSession } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import Providers from '@/components/provider';
+import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,6 +28,7 @@ export default async function RootLayout({
         <Providers>
           <div className='h-full '>
             <Navbar />
+            <Toaster />
             <main className='max-w-7xl mx-auto pt-20 pb-20 '>{children}</main>
           </div>
         </Providers>

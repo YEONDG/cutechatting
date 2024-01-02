@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { TwChatHeader } from './tw-chat-header';
 import { TwChatItems } from './tw-chat-items';
 import { TwChatBottom } from './tw-chat-bottom';
@@ -11,7 +13,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { useState } from 'react';
 
 interface ChatItem {
   id: number;

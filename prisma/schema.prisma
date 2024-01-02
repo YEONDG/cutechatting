@@ -47,6 +47,10 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Post          TwitchPost[]
+  likes         Like[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model VerificationToken {
@@ -58,16 +62,29 @@ model VerificationToken {
 }
 
 model TwitchPost {
-  id       Int     @id @default(autoincrement())
-  title    String
-  content  String?
-  tags     Tag[]
-  author   User    @relation(fields: [authorId], references: [id])
-  authorId String
+  id      Int     @id @default(autoincrement())
+  title   String
+  content String?
+  likes   Like[]
+  tags    Tag[]
+  author  User    @relation(fields: [userId], references: [id])
+  userId  String
 }
 
 model Tag {
   id    Int          @id @default(autoincrement())
   name  String       @unique
   posts TwitchPost[]
+}
+
+model Like {
+  id     String     @id @default(cuid())
+  post   TwitchPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId Int
+  userId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@index([userId])
 }
