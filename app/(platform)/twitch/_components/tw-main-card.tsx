@@ -9,12 +9,14 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { TagItem } from '@/components/tag-item';
 import type { Like, Tag } from '@prisma/client';
+import { Separator } from '@/components/ui/separator';
 
 interface TwMainCardProps {
   id: number;
   title: string;
   content: string | null;
   userId?: string;
+  createdAt: Date;
   likes?: Like[];
   tags?: Tag[];
 }
@@ -24,6 +26,7 @@ export const TwMainCard = ({
   title,
   content,
   userId,
+  createdAt,
   likes = [],
   tags = [],
 }: TwMainCardProps) => {
@@ -32,6 +35,8 @@ export const TwMainCard = ({
     likes.some((item) => item.userId === userId)
   );
   const [likeCount, setLikeCount] = useState(likes.length ?? 0);
+
+  const createdDate = new Date(createdAt).toLocaleDateString();
 
   useEffect(() => {
     setIsLiked(likes.some((item) => item.userId === userId));
@@ -71,32 +76,34 @@ export const TwMainCard = ({
   };
 
   return (
-    <div className='flex flex-col justify-between border-2 text-xs max-w-80'>
-      <div className='flex justify-between items-center pl-4'>
-        <p className='text-xl'>{id}</p>
-        <div className='text-xl'>{title}</div>
+    <div className='flex flex-col justify-between border-2 text-xs w-auto'>
+      <div className='flex justify-between items-center mx-4 mt-2'>
+        <p className='text-sm'>{id}</p>
+        <div className='text-lg font-bold'>{title}</div>
         <Button
           onClick={() => handleLikeClick(id)}
+          size='sm'
           variant='ghost'
           className={cn('flex items-center gap-2 hover:bg-red-500', {
             'bg-red-500': isLiked,
           })}
         >
           <ThumbsUp className='w-6 h-6' />
-          좋아요 {likeCount}
+          {likeCount}
         </Button>
       </div>
-      <div className='flex gap-4'>
-        <div>asdf1234</div>
-        <div>23-12-28 11:09</div>
+      <div className='flex ml-4 text-sm'>
+        <div>{createdDate}</div>
       </div>
-      <p className='text-xs text-center'>{content}</p>
+      <Separator className='my-4' />
+      <p className='text-xs text-center overflow-hidden'>{content}</p>
       <div className='flex m-2'>
         {tags.map((tag) => (
           <TagItem key={tag.id} name={tag.name} />
         ))}
       </div>
-      <div className='flex items-center'>
+      <Separator />
+      <div className='flex items-center mx-4 my-2'>
         <CopyToClipboard text={content ?? ''} onCopy={onCopySuccess}>
           <Button variant='default' className='w-24 h-8'>
             <ClipboardCopy />

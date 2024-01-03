@@ -7,9 +7,13 @@ export async function GET(req: Request) {
 
     const page = searchParams.get('page') ?? '1';
 
+    if (page === '0')
+      return new NextResponse('post가 없습니다!', { status: 400 });
+
     const popular = searchParams.get('popular') ?? 'false';
 
     const pageNumber = Number(page);
+
     if (popular === 'false') {
       const twitchPosts = await db.twitchPost.findMany({
         skip: (pageNumber - 1) * 6,

@@ -2,7 +2,7 @@ import { TwMainPagenation } from './tw-main-pagination';
 import { TwMainCard } from './tw-main-card';
 import { getAuthSession } from '@/lib/auth';
 import { getTotalPostsCount } from '@/actions/actions';
-import type { TwitchPostWithLikesTags } from '@/types/types';
+import type { TwitchPostWithLikesWithTags } from '@/types/types';
 
 interface TwMainProps {
   page: string;
@@ -26,14 +26,17 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
 
   const totalPostsCount = await getTotalPostsCount();
 
-  const posts: TwitchPostWithLikesTags[] = await getTwitchPosts(page, popular);
+  const posts: TwitchPostWithLikesWithTags[] = await getTwitchPosts(
+    page,
+    popular
+  );
 
   const startIdx = (pageNumber - 1) * 6;
   const endIdx = startIdx + 6;
 
   return (
     <div className='flex flex-col justify-center'>
-      <div className='flex flex-wrap w-full h-full gap-4'>
+      <div className='grid grid-cols-1  lg:grid-cols-3 w-full h-full gap-4'>
         {posts?.map((post) => (
           <TwMainCard
             key={post.id}
@@ -41,6 +44,7 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
             title={post.title}
             content={post.content}
             userId={userId}
+            createdAt={post.createdAt}
             likes={post.likes}
             tags={post.tags}
           />

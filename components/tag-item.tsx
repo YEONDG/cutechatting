@@ -1,15 +1,23 @@
+'use client';
+
 import { Tags } from 'lucide-react';
 import React from 'react';
+import { Badge } from './ui/badge';
+import { cn } from '@/lib/utils';
 
 interface TagItemProps {
   name: string;
+  count?: number;
+  size?: 'sm' | 'lg' | 'xl';
 }
 
-export const TagItem = ({ name }: TagItemProps) => {
+export const TagItem = ({ name, count, size }: TagItemProps) => {
   return (
-    <div className='flex items-center border text-xl bg-slate-400 rounded-lg p-1 px-2'>
+    <Badge size={size ?? 'default'}>
       <Tags className='h-6 w-6 mr-2' />
       {name}
-    </div>
+      {'  '}
+      {count && <span className='ml-2'>{count}개</span>}
+    </Badge>
   );
 };

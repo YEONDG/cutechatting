@@ -29,7 +29,6 @@ export const TwMainPagenation = ({
   const pageNumber = Number(page);
   const totalPage = Math.ceil(postsCount / 6);
 
-  if (pageNumber < 1) redirect(`/twitch/?page=1`);
   if (pageNumber > totalPage) redirect(`/twitch/?page=${totalPage}`);
 
   return (
