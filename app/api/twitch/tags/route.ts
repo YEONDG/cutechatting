@@ -14,7 +14,6 @@ export async function GET(req: Request) {
       postCount: tag.posts.length,
     }));
 
-    console.log(twitchTagsWithPostCount);
     return NextResponse.json(twitchTagsWithPostCount);
   } catch (error) {
     console.log('[Twitch_Tags_GET]', error);
