@@ -31,7 +31,6 @@ export const TwHeader = () => {
       <Button asChild>
         <Link href={'/twitch/tags'}>태그</Link>
       </Button>
-      <div>검색바</div>
     </div>
   );
 };
