@@ -8,7 +8,6 @@ const TwitchPage = async ({
 }) => {
   const page = searchParams['page'] ?? '1';
   const popular = searchParams['popular'] ?? 'false';
-  console.log(popular);
   return (
     <div className='flex flex-col justify-center items-center gap-5 mx-auto'>
       <TwHeader />

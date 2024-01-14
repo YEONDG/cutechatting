@@ -1,7 +1,6 @@
 import { TwMainPagenation } from './tw-main-pagination';
 import { TwMainCard } from './tw-main-card';
 import { getAuthSession } from '@/lib/auth';
-import { getTotalPostsCount } from '@/actions/actions';
 import type { TwitchPostWithLikesWithTags } from '@/types/types';
 
 interface TwMainProps {
@@ -12,6 +11,15 @@ const getTwitchPosts = async (page: string, popular: string) => {
   const response = await fetch(
     `http://localhost:3000/api/twitch?page=${page}&popular=${popular}`
   );
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+  return response.json();
+};
+
+const getTotalPostsCount = async () => {
+  const response = await fetch(`http://localhost:3000/api/twitch/postcount`);
+
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
   }

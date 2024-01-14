@@ -1,5 +1,4 @@
 export const siteConfig = {
   name: 'Ganda',
-  description:
-    '저 회사 떠납니다. 주변인에게 간단한 인사할 수 있는 웹사이트 입니다.',
+  description: '방송 플랫폼 이모티콘 채팅 사이트입니다.',
 };

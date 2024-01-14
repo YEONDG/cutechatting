@@ -14,8 +14,8 @@ export const Navbar = async () => {
         <div>{session?.user?.name}</div>
         <div className='flex gap-4'>
           <Link href='/twitch'>트위치</Link>
+          <Link href='/twitch'>치지직</Link>
           <Link href='/afreeca'>아프리카</Link>
-          <Link href='/chzzk'>치지직</Link>
           <Link href='/dashboard'>대시보드</Link>
           {session ? (
             <SignOutButton />
