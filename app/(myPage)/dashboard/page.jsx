@@ -1,18 +1,18 @@
 import { getAuthSession } from '@/lib/auth';
 import Image from 'next/image';
 import React from 'react';
+import DashboardMain from '../_components/dashboard-main';
 
-const DashboardPage = async () => {
+const DashboardPage = async ({ searchParams }) => {
   const { user } = await getAuthSession();
+  const page = searchParams['page'] ?? '1';
   return (
     <div>
-      <div>{user.id}</div>
-      <div>{user.name}</div>
-      <div>{user.email}</div>
+      <div>환영합니다. {user.name}님!</div>
       <div>
-        <Image src={user?.image} width={400} height={400} alt='avatar' />
+        <div className='text-3xl'>나의 좋아요 목록</div>
+        <DashboardMain userId={user.id} page={page} />
       </div>
-      <div>{user.username}</div>
     </div>
   );
 };

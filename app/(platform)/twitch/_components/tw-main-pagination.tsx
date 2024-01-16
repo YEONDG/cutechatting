@@ -15,22 +15,23 @@ import {
 import { useIsPopularStore } from '@/store/useIsPopularStore';
 
 interface TwMainPagenationProps {
-  hasNextPage: boolean;
-  hasPrevPage: boolean;
+  page: string;
   postsCount: number;
 }
 
-export const TwMainPagenation = ({
-  hasPrevPage,
-  hasNextPage,
-  postsCount,
-}: TwMainPagenationProps) => {
+export const TwMainPagenation = ({ postsCount }: TwMainPagenationProps) => {
   const { isPopular } = useIsPopularStore();
 
   const searchParams = useSearchParams();
   const page = searchParams.get('page') ?? '1';
   const pageNumber = Number(page);
   const totalPage = Math.ceil(postsCount / 6);
+
+  const startIdx = (pageNumber - 1) * 6;
+  const endIdx = startIdx + 6;
+
+  const hasNextPage = endIdx < postsCount;
+  const hasPrevPage = startIdx > 0;
 
   if (pageNumber > totalPage) redirect(`/twitch/?page=${totalPage}`);
 

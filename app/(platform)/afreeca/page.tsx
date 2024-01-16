@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AfreecaPage = () => {
-  return <div>AfreecaPage</div>;
+  return <div>공사중</div>;
 };
 
 export default AfreecaPage;

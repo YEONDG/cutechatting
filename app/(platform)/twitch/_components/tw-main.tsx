@@ -30,8 +30,6 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
   const session = await getAuthSession();
   const userId = session?.user.id;
 
-  const pageNumber = Number(page);
-
   const totalPostsCount = await getTotalPostsCount();
 
   const posts: TwitchPostWithLikesWithTags[] = await getTwitchPosts(
@@ -39,8 +37,7 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
     popular
   );
 
-  const startIdx = (pageNumber - 1) * 6;
-  const endIdx = startIdx + 6;
+  const pageNumber = Number(page);
 
   return (
     <div className='flex flex-col justify-center'>
@@ -60,8 +57,9 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
       </div>
       <div className='p-10'>
         <TwMainPagenation
-          hasNextPage={endIdx < totalPostsCount}
-          hasPrevPage={startIdx > 0}
+          page={page}
+          // hasNextPage={endIdx < totalPostsCount}
+          // hasPrevPage={startIdx > 0}
           postsCount={totalPostsCount}
         />
       </div>
