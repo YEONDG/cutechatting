@@ -2,6 +2,7 @@ import { getAuthSession } from '@/lib/auth';
 import Link from 'next/link';
 import React from 'react';
 import { SignOutButton } from './sign-out-button';
+import { ModeToggle } from '../mode-toggle';
 
 export const Navbar = async () => {
   const session = await getAuthSession();
@@ -13,6 +14,7 @@ export const Navbar = async () => {
         </div>
         <div>{session?.user?.name}</div>
         <div className='flex gap-4'>
+          <ModeToggle />
           <Link href='/twitch'>트위치</Link>
           <Link href='/twitch'>치지직</Link>
           <Link href='/afreeca'>아프리카</Link>
