@@ -76,29 +76,32 @@ export const TwMainCard = ({
   };
 
   return (
-    <div className='flex flex-col justify-between border-2 text-xs w-auto'>
+    <div className='flex flex-col justify-between border text-xs w-auto'>
       <div className='h-20'>
         <div className='flex justify-between items-center mx-4 mt-2'>
-          <p className='text-sm'>{id}</p>
-          <div className='text-lg font-bold'>{title}</div>
+          <div className='text-2xl font-bold'>{title}</div>
           <Button
             onClick={() => handleLikeClick(id)}
             size='sm'
             variant='ghost'
-            className={cn('flex items-center gap-2 hover:bg-red-500', {
-              'bg-red-500': isLiked,
-            })}
+            className={cn(
+              'flex items-center gap-2 hover:bg-red-500 rounded-xl',
+              {
+                'bg-red-500': isLiked,
+              }
+            )}
           >
             <ThumbsUp className='w-6 h-6' />
             {likeCount}
           </Button>
         </div>
-        <div className='flex ml-4 text-sm'>
-          <div>{createdDate}</div>
+        <div className='flex justify-between mx-4 my-1 text-sm '>
+          <div className='text-slate-500'>{createdDate}</div>
+          <p className='text-sm'>{id}번</p>
         </div>
       </div>
-      <Separator className='my-4' />
-      <p className='flex items-center h-full text-xs text-center overflow-hidden'>
+      <Separator className='mb-2' />
+      <p className='flex items-center h-full text-xs text-center overflow-hidden max-w-sm '>
         {content}
       </p>
       <div className='flex m-2'>

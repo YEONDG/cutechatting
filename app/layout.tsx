@@ -3,14 +3,12 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/config/site';
 import { Navbar } from '@/components/layout/navbar';
-import Provider from '@/components/provider';
-import { getServerSession } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
 import Providers from '@/components/provider';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Noto_Sans_KR } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const noto_sans = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
@@ -25,7 +23,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={noto_sans.className}>
         <Providers>
           <ThemeProvider
             attribute='class'

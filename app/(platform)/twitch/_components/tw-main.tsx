@@ -37,8 +37,6 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
     popular
   );
 
-  const pageNumber = Number(page);
-
   return (
     <div className='flex flex-col justify-center'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 lg:px-0 h-full gap-4'>
@@ -56,12 +54,7 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
         ))}
       </div>
       <div className='p-10'>
-        <TwMainPagenation
-          page={page}
-          // hasNextPage={endIdx < totalPostsCount}
-          // hasPrevPage={startIdx > 0}
-          postsCount={totalPostsCount}
-        />
+        <TwMainPagenation page={page} postsCount={totalPostsCount} />
       </div>
     </div>
   );

@@ -7,13 +7,12 @@ import { ModeToggle } from '../mode-toggle';
 export const Navbar = async () => {
   const session = await getAuthSession();
   return (
-    <div className='fixed top-0 w-full h-14 px-4 border-b shadow-sm bg-white flex items-center'>
+    <div className='fixed top-0 w-full h-14 px-4 border-b shadow-sm bg-white flex items-center dark:bg-black'>
       <div className='md:max-w-screen-2xl mx-auto flex items-center w-full justify-between'>
         <div>
           <Link href='/'>ganda</Link>
         </div>
-        <div>{session?.user?.name}</div>
-        <div className='flex gap-4'>
+        <div className='flex gap-4 items-center'>
           <ModeToggle />
           <Link href='/twitch'>트위치</Link>
           <Link href='/twitch'>치지직</Link>
