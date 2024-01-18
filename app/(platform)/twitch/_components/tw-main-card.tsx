@@ -71,7 +71,7 @@ export const TwMainCard = ({
       toast.success('좋아요 성공');
     } catch (error) {
       console.error('Error while processing like:', (error as Error).message);
-      toast.error('좋아요 실패');
+      toast.error('로그인이 필요합니다.');
     }
   };
 

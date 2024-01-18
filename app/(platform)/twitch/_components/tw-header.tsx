@@ -17,7 +17,6 @@ export const TwHeader = () => {
   return (
     <div className='flex gap-4'>
       <TwChatComponent />
-
       <Button asChild>
         <Link href={'/twitch'}>최신순</Link>
       </Button>
@@ -30,6 +29,9 @@ export const TwHeader = () => {
       </Button>
       <Button asChild>
         <Link href={'/twitch/tags'}>태그</Link>
+      </Button>
+      <Button>
+        <Link href={'/twitch/contribute'}>글쓰기</Link>
       </Button>
     </div>
   );

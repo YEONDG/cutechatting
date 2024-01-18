@@ -28,7 +28,7 @@ interface DashboardMainProps {
   page: string;
 }
 
-const DashboardMain = async ({ userId, page }: DashboardMainProps) => {
+export const DashboardMain = async ({ userId, page }: DashboardMainProps) => {
   const posts: TwitchPostWithLikesWithTags[] = await getLikePosts(userId);
 
   const totalLikePostsCount = await getTotalLikePostsCount(userId);
@@ -56,5 +56,3 @@ const DashboardMain = async ({ userId, page }: DashboardMainProps) => {
     </div>
   );
 };
-
-export default DashboardMain;
