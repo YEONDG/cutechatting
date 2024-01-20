@@ -6,7 +6,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { db } from './db';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   providers: [
     KakaoProvider({
@@ -27,7 +27,7 @@ export const authOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, account, profile }) {
+    async jwt({ token, user }) {
       const dbUser = await db.user.findFirst({
         where: {
           email: token.email,
@@ -45,7 +45,7 @@ export const authOptions = {
             id: dbUser.id,
           },
           data: {
-            username: nanoid(10),
+            username: '손님' + nanoid(10),
           },
         });
       }
