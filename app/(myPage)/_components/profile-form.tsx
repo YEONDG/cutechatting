@@ -11,37 +11,33 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { UsernameRequest, UsernameValidator } from '@/lib/validators/username';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Session, User } from '@prisma/client';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
+import { toast } from 'sonner';
 
-const formSchema = z.object({
-  username: z
-    .string()
-    .min(2, {
-      message: '최소한 2글자 이상이어야 합니다.',
-    })
-    .max(12, {
-      message: '최대한 12글자 이하여야 합니다.',
-    }),
-});
+interface ProfileFormProps {
+  user: Pick<User, 'id'> & { username: string | null };
+}
 
-export const ProfileForm = () => {
-  const { data: session } = useSession();
+export const ProfileForm = ({ user }: ProfileFormProps) => {
+  const router = useRouter();
+  console.log(user);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<UsernameRequest>({
+    resolver: zodResolver(UsernameValidator),
     defaultValues: {
-      username: session?.user.username ?? '',
+      username: user.username ?? '',
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: UsernameRequest) => {
     try {
-      const response = await fetch('/api/update-profile', {
-        method: 'POST',
+      const response = await fetch('/api/dashboard/profile', {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -51,11 +47,14 @@ export const ProfileForm = () => {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
+      const responseData = await response.json();
 
-      // 여기에서 서버 응답 처리
-      console.log('프로필 업데이트 성공', await response.json());
+      console.log('프로필 업데이트 성공', responseData);
+      toast.success('닉네임 변경 완료.');
+      router.refresh();
     } catch (error) {
-      console.error('프로필 업데이트 실패', error);
+      console.error('닉네임 변경 실패.', error);
+      return toast.error('닉네임 변경 실패.');
     }
   };
   return (
@@ -66,11 +65,15 @@ export const ProfileForm = () => {
           name='username'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>별명</FormLabel>
+              <FormLabel>닉네임 : {user.username}</FormLabel>
               <FormControl>
-                <Input placeholder='별명' {...field} />
+                <Input
+                  placeholder='닉네임'
+                  {...field}
+                  className='bg-stone-300'
+                />
               </FormControl>
-              <FormDescription>별명 수정하기.</FormDescription>
+              <FormDescription>최소 2글자이상 최대 12글자이하.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

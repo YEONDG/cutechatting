@@ -1,7 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import { DashboardMain } from '../_components/dashboard-main';
 import { redirect } from 'next/navigation';
-import { toast } from 'sonner';
 
 const DashboardPage = async ({
   searchParams,

@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 
 const AccountPage = async () => {
   const session = await getAuthSession();
+  console.log(session);
 
   if (!session) {
     redirect('/sign-in');
@@ -15,7 +16,7 @@ const AccountPage = async () => {
         <h3 className='text-2xl'>프로필 수정</h3>
       </div>
       <Separator />
-      <ProfileForm />
+      <ProfileForm user={session.user} />
     </section>
   );
 };

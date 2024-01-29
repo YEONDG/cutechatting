@@ -76,10 +76,10 @@ export const TwMainCard = ({
   };
 
   return (
-    <div className='flex flex-col justify-between border text-xs w-auto'>
+    <div className='flex flex-col justify-between border border-black text-xs w-auto'>
       <div className='h-20'>
         <div className='flex justify-between items-center mx-4 mt-2'>
-          <div className='text-2xl font-bold'>{title}</div>
+          <h2 className='text-2xl font-bold'>{title}</h2>
           <Button
             onClick={() => handleLikeClick(id)}
             size='sm'
@@ -110,7 +110,7 @@ export const TwMainCard = ({
         ))}
       </div>
       <Separator />
-      <div className='flex items-center mx-4 my-2'>
+      <div className='flex items-center mx-4 my-2 gap-4'>
         <CopyToClipboard text={content ?? ''} onCopy={onCopySuccess}>
           <Button variant='default' className='w-24 h-8'>
             <ClipboardCopy />

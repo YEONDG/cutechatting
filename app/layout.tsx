@@ -33,7 +33,7 @@ export default async function RootLayout({
           >
             <div className='h-full '>
               <Navbar />
-              <Toaster />
+              <Toaster richColors />
               <main className='max-w-7xl mx-auto pt-20 pb-20 h-full '>
                 {children}
               </main>
