@@ -16,7 +16,7 @@ const DashboardPage = async ({
 
   return (
     <div className='w-full'>
-      <div>환영합니다. {session.user.name}님!</div>
+      <div>환영합니다. {session.user.username}님!</div>
       <div className='flex flex-col gap-4'>
         <div className='text-3xl'>나의 좋아요 목록</div>
         <DashboardMain userId={session.user.id} page={page} />

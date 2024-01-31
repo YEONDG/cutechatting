@@ -13,8 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { UsernameRequest, UsernameValidator } from '@/lib/validators/username';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Session, User } from '@prisma/client';
-import { useSession } from 'next-auth/react';
+import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -70,7 +69,7 @@ export const ProfileForm = ({ user }: ProfileFormProps) => {
                 <Input
                   placeholder='닉네임'
                   {...field}
-                  className='bg-stone-300'
+                  className='bg-slate-200 dark:text-black'
                 />
               </FormControl>
               <FormDescription>최소 2글자이상 최대 12글자이하.</FormDescription>

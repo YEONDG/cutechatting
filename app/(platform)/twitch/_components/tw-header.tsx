@@ -21,7 +21,7 @@ export const TwHeader = () => {
         <Link href={'/twitch'}>최신순</Link>
       </Button>
       <Button
-        variant={isPopular ? 'destructive' : 'default'}
+        variant={isPopular ? 'outline' : 'default'}
         onClick={toggleIsPopular}
         asChild
       >
