@@ -1,4 +1,3 @@
-import { Input } from '@/components/ui/input';
 import { TwForm } from './_components/tw-form';
 import { getAuthSession } from '@/lib/auth';
 
@@ -12,6 +11,7 @@ const ContributePage = async () => {
           게시글 작성해주시면 검토 후에 게시판에 올려드립니다.!
         </p>
       </div>
+
       <div className='max-w-2xl'>
         <TwForm userId={session?.user.id} />
       </div>

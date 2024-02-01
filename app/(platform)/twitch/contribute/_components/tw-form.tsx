@@ -17,35 +17,18 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
-
-const formSchema = z.object({
-  title: z
-    .string()
-    .min(2, {
-      message: '최소한 2글자 이상이어야 합니다.',
-    })
-    .max(12, {
-      message: '최대한 12글자 이하여야 합니다.',
-    }),
-  content: z.string().min(2, {
-    message: '최소한 2글자 이상이어야 합니다.',
-  }),
-  tag: z
-    .string()
-
-    .max(30, {
-      message: '최대한 30글자 이하여야 합니다.',
-    })
-    .optional(),
-});
+import {
+  SubmissionRequest,
+  SubmissionValidator,
+} from '@/lib/validators/submission';
 
 interface TwFormProps {
   userId?: string;
 }
 
 export const TwForm = ({ userId }: TwFormProps) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<SubmissionRequest>({
+    resolver: zodResolver(SubmissionValidator),
     defaultValues: {
       title: '',
       content: '',
@@ -53,13 +36,30 @@ export const TwForm = ({ userId }: TwFormProps) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: SubmissionRequest) => {
     if (!userId) {
       return toast.error('로그인이 필요합니다.');
     }
-    const data = { ...values, userId };
-    toast.success('게시글 작성 완료');
-    form.reset();
+    try {
+      const response = await fetch('/api/submission', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log(responseData, '뭐넘어옴?');
+      toast.success('게시글 작성 완료');
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      toast.error('게시글 작성 실패');
+    }
   };
 
   return (
