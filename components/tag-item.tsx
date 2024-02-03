@@ -1,11 +1,8 @@
 'use client';
 
 import { Tags } from 'lucide-react';
-import React from 'react';
 import { Badge } from './ui/badge';
-import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 interface TagItemProps {
   id: number;

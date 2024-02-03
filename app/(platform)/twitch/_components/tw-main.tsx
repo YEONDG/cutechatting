@@ -7,19 +7,23 @@ interface TwMainProps {
   page: string;
   popular: string;
 }
-const getTwitchPosts = async (page: string, popular: string) => {
-  const response = await fetch(
-    `http://localhost:3000/api/twitch?page=${page}&popular=${popular}`
-  );
+
+const getTotalPostsCount = async (): Promise<number> => {
+  const response = await fetch(`http://localhost:3000/api/twitch/postcount`);
+
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
   return response.json();
 };
 
-const getTotalPostsCount = async () => {
-  const response = await fetch(`http://localhost:3000/api/twitch/postcount`);
-
+const getTwitchPosts = async (
+  page: string,
+  popular: string
+): Promise<TwitchPostWithLikesWithTags[]> => {
+  const response = await fetch(
+    `http://localhost:3000/api/twitch?page=${page}&popular=${popular}`
+  );
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
@@ -30,13 +34,11 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
   const session = await getAuthSession();
   const userId = session?.user.id;
 
-  const totalPostsCount = await getTotalPostsCount();
+  const postsCount = getTotalPostsCount();
+  const postsData = getTwitchPosts(page, popular);
 
-  const posts: TwitchPostWithLikesWithTags[] = await getTwitchPosts(
-    page,
-    popular
-  );
-
+  const [totalPostsCount, posts] = await Promise.all([postsCount, postsData]);
+  console.log(posts);
   return (
     <div className='flex flex-col justify-center'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 lg:px-0 h-full gap-4'>
@@ -50,11 +52,12 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
             createdAt={post.createdAt}
             likes={post.likes}
             tags={post.tags}
+            username={post.author.username}
           />
         ))}
       </div>
       <div className='p-10'>
-        <TwMainPagenation page={page} postsCount={totalPostsCount} />
+        <TwMainPagenation postsCount={totalPostsCount} />
       </div>
     </div>
   );

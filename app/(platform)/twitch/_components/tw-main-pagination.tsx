@@ -15,7 +15,6 @@ import {
 import { useIsPopularStore } from '@/store/useIsPopularStore';
 
 interface TwMainPagenationProps {
-  page: string;
   postsCount: number;
 }
 

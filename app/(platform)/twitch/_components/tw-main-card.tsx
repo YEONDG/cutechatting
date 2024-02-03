@@ -8,8 +8,8 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { TagItem } from '@/components/tag-item';
-import type { Like, Tag } from '@prisma/client';
 import { Separator } from '@/components/ui/separator';
+import type { Like, Tag } from '@prisma/client';
 
 interface TwMainCardProps {
   id: number;
@@ -19,6 +19,7 @@ interface TwMainCardProps {
   createdAt: Date;
   likes?: Like[];
   tags?: Tag[];
+  username: string;
 }
 
 export const TwMainCard = ({
@@ -29,12 +30,13 @@ export const TwMainCard = ({
   createdAt,
   likes = [],
   tags = [],
+  username,
 }: TwMainCardProps) => {
   const [copy, setCopy] = useState(false);
   const [isLiked, setIsLiked] = useState(
     likes.some((item) => item.userId === userId)
   );
-  const [likeCount, setLikeCount] = useState(likes.length ?? 0);
+  const [likeCount, setLikeCount] = useState(likes.length);
 
   const createdDate = new Date(createdAt).toLocaleDateString();
 
@@ -96,7 +98,9 @@ export const TwMainCard = ({
           </Button>
         </div>
         <div className='flex justify-between mx-4 my-1 text-sm '>
-          <div className='text-slate-500'>{createdDate}</div>
+          <div className='text-slate-500'>
+            {createdDate} / {username}
+          </div>
           <p className='text-sm'>{id}번</p>
         </div>
       </div>

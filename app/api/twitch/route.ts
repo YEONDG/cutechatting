@@ -24,6 +24,11 @@ export async function GET(req: Request) {
         include: {
           likes: true,
           tags: true,
+          author: {
+            select: {
+              username: true,
+            },
+          },
         },
       });
 
@@ -45,6 +50,11 @@ export async function GET(req: Request) {
         include: {
           likes: true,
           tags: true,
+          author: {
+            select: {
+              username: true,
+            },
+          },
         },
       });
 

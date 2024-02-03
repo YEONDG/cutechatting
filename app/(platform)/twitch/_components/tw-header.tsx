@@ -10,6 +10,9 @@ export const TwHeader = () => {
 
   const toggleIsPopular = () => {
     setIsPopular(!isPopular);
+    setTimeout(() => {
+      setIsPopular(false);
+    }, 1000);
   };
 
   const popularLink = isPopular ? '/twitch' : '/twitch?popular=true';
@@ -30,7 +33,7 @@ export const TwHeader = () => {
       <Button asChild>
         <Link href={'/twitch/tags'}>태그</Link>
       </Button>
-      <Button>
+      <Button asChild>
         <Link href={'/twitch/contribute'}>글쓰기</Link>
       </Button>
     </div>

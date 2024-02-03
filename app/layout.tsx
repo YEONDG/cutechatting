@@ -1,12 +1,12 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
+import { Toaster } from 'sonner';
+
 import { siteConfig } from '@/config/site';
 import { Navbar } from '@/components/layout/navbar';
 import Providers from '@/components/provider';
-import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Noto_Sans_KR } from 'next/font/google';
+import './globals.css';
+import type { Metadata } from 'next';
 
 const noto_sans = Noto_Sans_KR({ subsets: ['latin'] });
 
