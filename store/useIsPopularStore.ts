@@ -7,5 +7,5 @@ interface IsPopularStore {
 
 export const useIsPopularStore = create<IsPopularStore>((set) => ({
   isPopular: false,
-  setIsPopular: (isPopular: boolean) => set({ isPopular }),
+  setIsPopular: (isPopular) => set({ isPopular }),
 }));

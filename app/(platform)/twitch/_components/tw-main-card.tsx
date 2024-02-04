@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ClipboardCopy, ThumbsUp } from 'lucide-react';
+import { BadgeCheck, ClipboardCopy, ThumbsUp } from 'lucide-react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { toast } from 'sonner';
 
@@ -20,6 +20,7 @@ interface TwMainCardProps {
   likes?: Like[];
   tags?: Tag[];
   username: string;
+  approved: boolean;
 }
 
 export const TwMainCard = ({
@@ -31,6 +32,7 @@ export const TwMainCard = ({
   likes = [],
   tags = [],
   username,
+  approved,
 }: TwMainCardProps) => {
   const [copy, setCopy] = useState(false);
   const [isLiked, setIsLiked] = useState(
@@ -81,6 +83,9 @@ export const TwMainCard = ({
     <div className='flex flex-col justify-between border border-black text-xs w-auto'>
       <div className='h-20'>
         <div className='flex justify-between items-center mx-4 mt-2'>
+          <BadgeCheck
+            className={cn(`hidden`, { 'block text-green-500': approved })}
+          />
           <h2 className='text-2xl font-bold'>{title}</h2>
           <Button
             onClick={() => handleLikeClick(id)}

@@ -3,7 +3,15 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
   try {
-    const postsCount = await db.twitchPost.count();
+    const { searchParams } = new URL(req.url);
+
+    const approved = searchParams.get('approved') ?? 'true';
+
+    const whereCondition = approved === 'true' ? { approved: true } : {};
+
+    const postsCount = await db.twitchPost.count({
+      where: whereCondition,
+    });
 
     return NextResponse.json(postsCount);
   } catch (error) {

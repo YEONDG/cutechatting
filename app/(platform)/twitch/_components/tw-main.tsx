@@ -5,10 +5,10 @@ import type { TwitchPostWithLikesWithTags } from '@/types/types';
 
 interface TwMainProps {
   page: string;
-  popular: string;
+  popular: boolean;
 }
 
-const getTotalPostsCount = async (): Promise<number> => {
+export const getTotalPostsCount = async (): Promise<number> => {
   const response = await fetch(`http://localhost:3000/api/twitch/postcount`);
 
   if (!response.ok) {
@@ -17,12 +17,13 @@ const getTotalPostsCount = async (): Promise<number> => {
   return response.json();
 };
 
-const getTwitchPosts = async (
+export const getTwitchPosts = async (
   page: string,
-  popular: string
+  popular: boolean = false,
+  approved: boolean = true
 ): Promise<TwitchPostWithLikesWithTags[]> => {
   const response = await fetch(
-    `http://localhost:3000/api/twitch?page=${page}&popular=${popular}`
+    `http://localhost:3000/api/twitch?page=${page}&popular=${popular.toString()}&approved=${approved.toString()}`
   );
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -30,7 +31,7 @@ const getTwitchPosts = async (
   return response.json();
 };
 
-export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
+export const TwMain = async ({ page, popular }: TwMainProps) => {
   const session = await getAuthSession();
   const userId = session?.user.id;
 
@@ -38,7 +39,7 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
   const postsData = getTwitchPosts(page, popular);
 
   const [totalPostsCount, posts] = await Promise.all([postsCount, postsData]);
-  console.log(posts);
+
   return (
     <div className='flex flex-col justify-center'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 lg:px-0 h-full gap-4'>
@@ -53,11 +54,12 @@ export const TwMain = async ({ page, popular = 'false' }: TwMainProps) => {
             likes={post.likes}
             tags={post.tags}
             username={post.author.username}
+            approved={post.approved}
           />
         ))}
       </div>
       <div className='p-10'>
-        <TwMainPagenation postsCount={totalPostsCount} />
+        <TwMainPagenation postsCount={totalPostsCount} url={'/twitch'} />
       </div>
     </div>
   );

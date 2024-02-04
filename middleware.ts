@@ -10,5 +10,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/r/:path*/submit', '/r/create'],
+  matcher: ['/dashboard'],
 };

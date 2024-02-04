@@ -16,9 +16,13 @@ import { useIsPopularStore } from '@/store/useIsPopularStore';
 
 interface TwMainPagenationProps {
   postsCount: number;
+  url: string;
 }
 
-export const TwMainPagenation = ({ postsCount }: TwMainPagenationProps) => {
+export const TwMainPagenation = ({
+  postsCount,
+  url,
+}: TwMainPagenationProps) => {
   const { isPopular } = useIsPopularStore();
 
   const searchParams = useSearchParams();
@@ -32,7 +36,7 @@ export const TwMainPagenation = ({ postsCount }: TwMainPagenationProps) => {
   const hasNextPage = endIdx < postsCount;
   const hasPrevPage = startIdx > 0;
 
-  if (pageNumber > totalPage) redirect(`/twitch/?page=${totalPage}`);
+  if (pageNumber > totalPage) redirect(`${url}?page=${totalPage}`);
 
   return (
     <Pagination>
@@ -40,7 +44,7 @@ export const TwMainPagenation = ({ postsCount }: TwMainPagenationProps) => {
         <PaginationItem>
           <Button variant='ghost' disabled={!hasPrevPage}>
             <PaginationPrevious
-              href={`/twitch/?page=${pageNumber - 1}${
+              href={`${url}?page=${pageNumber - 1}${
                 isPopular ? '&popular=true' : ''
               }`}
             />
@@ -50,12 +54,13 @@ export const TwMainPagenation = ({ postsCount }: TwMainPagenationProps) => {
           totalPage={totalPage}
           currentPage={pageNumber}
           isPopular={isPopular}
+          url={url}
         />
 
         <PaginationItem>
           <Button variant='ghost' disabled={!hasNextPage}>
             <PaginationNext
-              href={`/twitch/?page=${pageNumber + 1}${
+              href={`${url}?page=${pageNumber + 1}${
                 isPopular ? '&popular=true' : ''
               }`}
             />
@@ -69,13 +74,15 @@ const PageNumber = ({
   page,
   isActive,
   isPopular,
+  url,
 }: {
   page: number;
   isActive: boolean;
   isPopular: boolean;
+  url: string;
 }) => (
   <PaginationLink
-    href={`/twitch/?page=${page}${isPopular ? '&popular=true' : ''}`}
+    href={`${url}?page=${page}${isPopular ? '&popular=true' : ''}`}
     isActive={isActive}
   >
     {page}
@@ -86,10 +93,12 @@ const PageNumbers = ({
   totalPage,
   currentPage,
   isPopular,
+  url,
 }: {
   totalPage: number;
   currentPage: number;
   isPopular: boolean;
+  url: string;
 }) => {
   const pages = [];
 
@@ -106,6 +115,7 @@ const PageNumbers = ({
       page={1}
       isActive={currentPage === 1}
       isPopular={isPopular}
+      url={url}
     />
   );
   const lastPage =
@@ -115,6 +125,7 @@ const PageNumbers = ({
         page={totalPage}
         isActive={currentPage === totalPage}
         isPopular={isPopular}
+        url={url}
       />
     );
   for (let i = startPage; i <= endPage; i++) {
@@ -124,6 +135,7 @@ const PageNumbers = ({
         page={i}
         isActive={i === currentPage}
         isPopular={isPopular}
+        url={url}
       />
     );
   }

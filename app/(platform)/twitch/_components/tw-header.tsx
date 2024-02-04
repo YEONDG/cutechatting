@@ -1,11 +1,14 @@
 'use client';
-import React from 'react';
-import { TwChatComponent } from './tw-chat-component';
-import { Button } from '@/components/ui/button';
+
 import Link from 'next/link';
+import { BadgeCheckIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { TwChatComponent } from './tw-chat-component';
 import { useIsPopularStore } from '@/store/useIsPopularStore';
+import { useSearchParams } from 'next/navigation';
 
 export const TwHeader = () => {
+  const searchParams = useSearchParams();
   const { isPopular, setIsPopular } = useIsPopularStore();
 
   const toggleIsPopular = () => {
@@ -35,6 +38,9 @@ export const TwHeader = () => {
       </Button>
       <Button asChild>
         <Link href={'/twitch/contribute'}>글쓰기</Link>
+      </Button>
+      <Button asChild>
+        <Link href={'/twitch/all'}>인증 안된 게시판 가기</Link>
       </Button>
     </div>
   );
