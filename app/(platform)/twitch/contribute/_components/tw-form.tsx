@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,19 +20,21 @@ import {
   SubmissionRequest,
   SubmissionValidator,
 } from '@/lib/validators/submission';
+import { TagInput } from './tag-input';
 
 interface TwFormProps {
   userId?: string;
 }
-
+// let renderCount = 0;
 export const TwForm = ({ userId }: TwFormProps) => {
   const form = useForm<SubmissionRequest>({
     resolver: zodResolver(SubmissionValidator),
     defaultValues: {
       title: '',
       content: '',
-      tag: '',
+      tags: [],
     },
+    // mode: 'onChange',
   });
 
   const onSubmit = async (values: SubmissionRequest) => {
@@ -41,19 +42,20 @@ export const TwForm = ({ userId }: TwFormProps) => {
       return toast.error('로그인이 필요합니다.');
     }
     try {
-      const response = await fetch('/api/submission', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
+      console.log(values);
+      //   const response = await fetch('/api/contribute', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(values),
+      //   });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const responseData = await response.json();
-      console.log(responseData, '뭐넘어옴?');
+      //   if (!response.ok) {
+      //     throw new Error(`HTTP error! Status: ${response.status}`);
+      //   }
+      //   const responseData = await response.json();
+      // console.log(responseData, '뭐넘어옴?');
       toast.success('게시글 작성 완료');
       form.reset();
     } catch (err) {
@@ -62,9 +64,22 @@ export const TwForm = ({ userId }: TwFormProps) => {
     }
   };
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
+  };
+
+  console.log(form.formState.errors);
+  // renderCount++;
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+      {/* <span className='counter'>Render Count: {renderCount}</span> */}
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='space-y-8'
+        onKeyDown={onKeyDown}
+      >
         <FormField
           control={form.control}
           name='title'
@@ -72,7 +87,11 @@ export const TwForm = ({ userId }: TwFormProps) => {
             <FormItem>
               <FormLabel>제목</FormLabel>
               <FormControl>
-                <Input placeholder='제목' {...field} />
+                <Input
+                  placeholder='제목'
+                  {...field}
+                  className='bg-slate-300 dark:bg-slate-700 '
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -87,7 +106,7 @@ export const TwForm = ({ userId }: TwFormProps) => {
               <FormControl>
                 <Textarea
                   placeholder='내용'
-                  className='max-w-2xl text-xs'
+                  className='max-w-2xl text-xs bg-slate-300 dark:bg-slate-700'
                   {...field}
                 />
               </FormControl>
@@ -97,12 +116,12 @@ export const TwForm = ({ userId }: TwFormProps) => {
         />
         <FormField
           control={form.control}
-          name='tag'
-          render={({ field }) => (
+          name='tags'
+          render={() => (
             <FormItem>
               <FormLabel>태그</FormLabel>
               <FormControl>
-                <Input placeholder='ex) 동물, 포켓몬' {...field} />
+                <TagInput />
               </FormControl>
               <FormMessage />
             </FormItem>
