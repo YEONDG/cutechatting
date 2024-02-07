@@ -5,8 +5,8 @@ export const SubmissionValidator = z.object({
     .string({
       required_error: '글제목은 필수입니다.',
     })
-    .min(2, {
-      message: '최소한 2글자 이상이어야 합니다.',
+    .min(1, {
+      message: '최소한 1글자 이상이어야 합니다.',
     })
     .max(12, {
       message: '최대한 12글자 이하여야 합니다.',

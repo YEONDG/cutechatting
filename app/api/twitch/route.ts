@@ -54,13 +54,3 @@ export async function GET(req: Request) {
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
-
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    return NextResponse.json(body);
-  } catch (error) {
-    console.log('[Twitch_Posts_GET]', error);
-    return new NextResponse('Internal Error', { status: 500 });
-  }
-}

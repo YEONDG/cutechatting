@@ -43,28 +43,25 @@ export const TwForm = ({ userId }: TwFormProps) => {
     control: form.control,
     name: 'tags',
   });
-  console.log(form.formState.errors, '이것은?');
 
-  console.log(form.formState.errors, '??');
   const onSubmit = async (values: SubmissionRequest) => {
     if (!userId) {
       return toast.error('로그인이 필요합니다.');
     }
     try {
-      console.log(values);
-      //   const response = await fetch('/api/contribute', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify(values),
-      //   });
+      const response = await fetch('/api/twitch/contribute', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
 
-      //   if (!response.ok) {
-      //     throw new Error(`HTTP error! Status: ${response.status}`);
-      //   }
-      //   const responseData = await response.json();
-      // console.log(responseData, '뭐넘어옴?');
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log(responseData, '뭐넘어옴?');
       toast.success('게시글 작성 완료');
       form.reset();
     } catch (err) {

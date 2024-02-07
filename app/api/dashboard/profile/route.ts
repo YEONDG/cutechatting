@@ -23,7 +23,6 @@ export async function PATCH(req: Request) {
       return NextResponse.json('이미 존재하는 별명입니다.', { status: 409 });
     }
 
-    // update username
     await db.user.update({
       where: {
         id: session.user.id,
