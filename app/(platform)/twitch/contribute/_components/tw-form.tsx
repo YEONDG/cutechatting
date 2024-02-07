@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
@@ -20,23 +20,32 @@ import {
   SubmissionRequest,
   SubmissionValidator,
 } from '@/lib/validators/submission';
-import { TagInput } from './tag-input';
+import { Plus, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface TwFormProps {
   userId?: string;
 }
-// let renderCount = 0;
 export const TwForm = ({ userId }: TwFormProps) => {
+  const defaultFormValues = {
+    title: '',
+    content: '',
+    tags: [{ tag: '' }],
+  };
+
   const form = useForm<SubmissionRequest>({
     resolver: zodResolver(SubmissionValidator),
-    defaultValues: {
-      title: '',
-      content: '',
-      tags: [],
-    },
-    // mode: 'onChange',
+    defaultValues: defaultFormValues,
+    mode: 'onChange',
   });
 
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: 'tags',
+  });
+  console.log(form.formState.errors, '이것은?');
+
+  console.log(form.formState.errors, '??');
   const onSubmit = async (values: SubmissionRequest) => {
     if (!userId) {
       return toast.error('로그인이 필요합니다.');
@@ -70,11 +79,8 @@ export const TwForm = ({ userId }: TwFormProps) => {
     }
   };
 
-  console.log(form.formState.errors);
-  // renderCount++;
   return (
     <Form {...form}>
-      {/* <span className='counter'>Render Count: {renderCount}</span> */}
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-8'
@@ -114,20 +120,52 @@ export const TwForm = ({ userId }: TwFormProps) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name='tags'
-          render={() => (
-            <FormItem>
-              <FormLabel>태그</FormLabel>
-              <FormControl>
-                <TagInput />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+        <div className=''>
+          {fields.map((field, index) => (
+            <FormField
+              key={field.id}
+              control={form.control}
+              name={`tags.${index}.tag`}
+              render={({ field }) => (
+                <FormItem className=''>
+                  <FormLabel className={cn(index !== 0 && 'sr-only')}>
+                    태그
+                  </FormLabel>
+                  <FormControl>
+                    <div className='relative'>
+                      <Input
+                        placeholder='태그'
+                        {...field}
+                        className='w-40 rounded-xl bg-slate-300 dark:bg-slate-700'
+                      />
+                      <X
+                        onClick={() => remove(index)}
+                        className='absolute left-32 top-2'
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
+          {form.formState.errors.tags?.message && (
+            <p className='text-sm font-medium text-destructive'>
+              {form.formState.errors.tags.message}
+            </p>
           )}
-        />
-        <Button type='submit'>제출하기</Button>
+          <Button
+            type='button'
+            onClick={() => append({ tag: '' })}
+            className='flex gap-2 mt-4'
+          >
+            태그 추가
+            <Plus />
+          </Button>
+        </div>
+        <Button type='submit' disabled={!form.formState.isValid}>
+          제출하기
+        </Button>
       </form>
     </Form>
   );

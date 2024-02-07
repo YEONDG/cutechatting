@@ -34,7 +34,7 @@ export async function GET(req: Request) {
 
     const twitchPosts = await db.twitchPost.findMany({
       where: whereCondition,
-      skip: (pageNumber - 1) * 6,
+      skip: (pageNumber - 1) * ITEMS_PER_PAGE,
       take: 6,
       orderBy: orderBy,
       include: {
@@ -49,6 +49,16 @@ export async function GET(req: Request) {
     });
 
     return NextResponse.json(twitchPosts);
+  } catch (error) {
+    console.log('[Twitch_Posts_GET]', error);
+    return new NextResponse('Internal Error', { status: 500 });
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    return NextResponse.json(body);
   } catch (error) {
     console.log('[Twitch_Posts_GET]', error);
     return new NextResponse('Internal Error', { status: 500 });

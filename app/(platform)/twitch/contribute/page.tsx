@@ -3,6 +3,7 @@ import { getAuthSession } from '@/lib/auth';
 
 const ContributePage = async () => {
   const session = await getAuthSession();
+
   return (
     <div className='flex flex-col container'>
       <div className='flex flex-col pb-10'>
