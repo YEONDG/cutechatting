@@ -77,7 +77,7 @@ export const ProfileForm = ({ user }: ProfileFormProps) => {
             </FormItem>
           )}
         />
-        <Button type='submit'>Submit</Button>
+        <Button type='submit'>제출하기</Button>
       </form>
     </Form>
   );

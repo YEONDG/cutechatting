@@ -1,7 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { BadgeCheck, ClipboardCopy, ThumbsUp } from 'lucide-react';
+import {
+  BadgeCheck,
+  ClipboardCopy,
+  Edit,
+  ThumbsUp,
+  Trash2,
+} from 'lucide-react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { toast } from 'sonner';
 
@@ -15,6 +21,7 @@ interface TwMainCardProps {
   id: number;
   title: string;
   content: string | null;
+  authorId: string;
   userId?: string;
   createdAt: Date;
   likes?: Like[];
@@ -27,6 +34,7 @@ export const TwMainCard = ({
   id,
   title,
   content,
+  authorId,
   userId,
   createdAt,
   likes = [],
@@ -80,7 +88,7 @@ export const TwMainCard = ({
   };
 
   return (
-    <div className='flex flex-col justify-between border border-black text-xs w-auto'>
+    <div className='flex flex-col justify-between border border-black text-xs w-auto dark:border-white'>
       <div className='h-20'>
         <div className='flex justify-between items-center mx-4 mt-2'>
           <BadgeCheck
@@ -119,7 +127,7 @@ export const TwMainCard = ({
         ))}
       </div>
       <Separator />
-      <div className='flex items-center mx-4 my-2 gap-4'>
+      <div className='flex justify-between items-center mx-4 my-2 gap-4'>
         <CopyToClipboard text={content ?? ''} onCopy={onCopySuccess}>
           <Button variant='default' className='w-24 h-8'>
             <ClipboardCopy />
@@ -127,6 +135,18 @@ export const TwMainCard = ({
           </Button>
         </CopyToClipboard>
         {copy && <div className='text-lg'>복사 완료</div>}
+        {authorId === userId && (
+          <div className='flex gap-2'>
+            <Edit
+              className='w-6 h-6 hover:scale-125 cursor-pointer'
+              onClick={() => {}}
+            />
+            <Trash2
+              className='w-6 h-6 hover:scale-125 cursor-pointer'
+              onClick={() => {}}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
