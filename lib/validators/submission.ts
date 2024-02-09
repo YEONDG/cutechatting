@@ -24,7 +24,7 @@ export const SubmissionValidator = z.object({
         tag: z
           .string()
           .min(1, { message: '최소 1글자 이상이여야 합니다.' })
-          .max(5, { message: '최대 7글자 이하여야 합니다.' }),
+          .max(7, { message: '최대 7글자 이하여야 합니다.' }),
       })
     )
     .max(3, { message: '태그는 최대 3개까지만 가능합니다.' })
