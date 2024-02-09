@@ -1,5 +1,5 @@
 import { TwHeader } from '../_components/tw-header';
-import { TwTagList } from './_components/TwTagList';
+import { TwTagList } from './_components/tw-tag-list';
 
 const TagsPage = () => {
   return (

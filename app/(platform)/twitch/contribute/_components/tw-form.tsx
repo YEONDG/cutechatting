@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,13 +15,13 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from 'sonner';
 import {
   SubmissionRequest,
   SubmissionValidator,
 } from '@/lib/validators/submission';
-import { Plus, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { createTwitchPost } from '@/apis/twitch/post';
+import { Plus, X } from 'lucide-react';
 
 interface TwFormProps {
   userId?: string;
@@ -49,24 +49,13 @@ export const TwForm = ({ userId }: TwFormProps) => {
       return toast.error('로그인이 필요합니다.');
     }
     try {
-      const response = await fetch('/api/twitch/contribute', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const responseData = await response.json();
-      console.log(responseData, '뭐넘어옴?');
-      toast.success('게시글 작성 완료');
+      const response = await createTwitchPost(values);
+      toast.success(response);
       form.reset();
     } catch (err) {
-      console.error(err);
-      toast.error('게시글 작성 실패');
+      if (err instanceof Error) {
+        toast.error('게시글 작성 실패' + err.message);
+      }
     }
   };
 

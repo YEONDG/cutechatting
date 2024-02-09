@@ -16,12 +16,12 @@ import { useIsPopularStore } from '@/store/useIsPopularStore';
 
 interface TwMainPagenationProps {
   postsCount: number;
-  url: string;
+  url?: string;
 }
 
 export const TwMainPagenation = ({
   postsCount,
-  url,
+  url = '/twitch',
 }: TwMainPagenationProps) => {
   const { isPopular } = useIsPopularStore();
 

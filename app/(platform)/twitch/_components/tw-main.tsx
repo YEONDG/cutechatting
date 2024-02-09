@@ -1,35 +1,12 @@
 import { TwMainPagenation } from './tw-main-pagination';
 import { TwMainCard } from './tw-main-card';
 import { getAuthSession } from '@/lib/auth';
-import type { TwitchPostWithLikesWithTags } from '@/types/types';
+import { getTotalPostsCount, getTwitchPosts } from '@/apis/twitch/post';
 
 interface TwMainProps {
   page: string;
   popular: boolean;
 }
-
-export const getTotalPostsCount = async (): Promise<number> => {
-  const response = await fetch(`http://localhost:3000/api/twitch/postcount`);
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-  return response.json();
-};
-
-export const getTwitchPosts = async (
-  page: string,
-  popular: boolean = false,
-  approved: boolean = true
-): Promise<TwitchPostWithLikesWithTags[]> => {
-  const response = await fetch(
-    `http://localhost:3000/api/twitch?page=${page}&popular=${popular.toString()}&approved=${approved.toString()}`
-  );
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-  return response.json();
-};
 
 export const TwMain = async ({ page, popular }: TwMainProps) => {
   const session = await getAuthSession();

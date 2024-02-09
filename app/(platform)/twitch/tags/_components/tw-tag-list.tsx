@@ -1,15 +1,9 @@
+import { getTwitchTagList } from '@/apis/twitch/post';
 import { TagItem } from '@/components/tag-item';
 import { TwitchTagWithPostsWithPostCount } from '@/types/types';
-import React from 'react';
-
-const fetchTwitchTags = async () => {
-  const response = await fetch('http://localhost:3000/api/twitch/tags');
-  const data = await response.json();
-  return data;
-};
 
 export const TwTagList = async () => {
-  const tags: TwitchTagWithPostsWithPostCount[] = await fetchTwitchTags();
+  const tags: TwitchTagWithPostsWithPostCount[] = await getTwitchTagList();
   return (
     <div className='mt-10'>
       <div className='flex gap-4'>

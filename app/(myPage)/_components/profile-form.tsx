@@ -1,5 +1,6 @@
 'use client';
 
+import { updateUsername } from '@/apis/dashboard/dashboard';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -35,20 +36,8 @@ export const ProfileForm = ({ user }: ProfileFormProps) => {
 
   const onSubmit = async (values: UsernameRequest) => {
     try {
-      const response = await fetch('/api/dashboard/profile', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await updateUsername(values);
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-      const responseData = await response.json();
-
-      console.log('프로필 업데이트 성공', responseData);
       toast.success('닉네임 변경 완료.');
       router.refresh();
     } catch (error) {

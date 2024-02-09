@@ -20,6 +20,11 @@ export async function GET(
       include: {
         likes: true,
         tags: true,
+        author: {
+          select: {
+            username: true,
+          },
+        },
       },
     });
 

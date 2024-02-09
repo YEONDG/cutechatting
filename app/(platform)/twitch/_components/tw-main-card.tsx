@@ -23,7 +23,7 @@ interface TwMainCardProps {
   createdAt: Date;
   likes?: Like[];
   tags?: Tag[];
-  username: string;
+  username?: string;
   approved: boolean;
   role?: UserRole;
 }
@@ -86,7 +86,7 @@ export const TwMainCard = ({
       <CardHeader
         id={id}
         title={title}
-        username={username}
+        username={username ?? ''}
         createdDate={createdDate}
         approved={approved}
       />

@@ -1,8 +1,8 @@
 import React from 'react';
 import { TwMainCard } from '../../_components/tw-main-card';
 import { getAuthSession } from '@/lib/auth';
-import { getTotalPostsCount, getTwitchPosts } from '../../_components/tw-main';
 import { TwMainPagenation } from '../../_components/tw-main-pagination';
+import { getTotalPostsCount, getTwitchPosts } from '@/apis/twitch/post';
 
 interface TwAllMainProps {
   page: string;

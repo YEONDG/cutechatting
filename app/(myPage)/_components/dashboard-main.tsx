@@ -1,27 +1,10 @@
+import {
+  getLikePosts,
+  getTotalLikePostsCount,
+} from '@/apis/dashboard/dashboard';
 import { TwMainCard } from '@/app/(platform)/twitch/_components/tw-main-card';
 import { TwMainPagenation } from '@/app/(platform)/twitch/_components/tw-main-pagination';
 import { TwitchPostWithLikesWithTags } from '@/types/types';
-
-const getLikePosts = async (userId: string) => {
-  const response = await fetch(
-    `http://localhost:3000/api/dashboard/posts/${userId}`
-  );
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-  return response.json();
-};
-
-const getTotalLikePostsCount = async (userId: string) => {
-  const response = await fetch(
-    `http://localhost:3000/api/dashboard/postcount/${userId}`
-  );
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
-  return response.json();
-};
 
 interface DashboardMainProps {
   userId: string;
@@ -42,15 +25,17 @@ export const DashboardMain = async ({ userId, page }: DashboardMainProps) => {
             id={post.id}
             title={post.title}
             content={post.content}
-            userId={userId}
+            authorId={post.userId}
             createdAt={post.createdAt}
+            userId={userId}
             likes={post.likes}
             tags={post.tags}
+            approved={post.approved}
           />
         ))}
       </div>
       <div className='p-10'>
-        <TwMainPagenation page={page} postsCount={totalLikePostsCount} />
+        <TwMainPagenation postsCount={totalLikePostsCount} />
       </div>
       {totalLikePostsCount}
     </div>
