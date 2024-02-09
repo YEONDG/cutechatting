@@ -13,6 +13,8 @@ import { CardHeader } from '@/components/card/card-header';
 import { LikeButton } from '@/components/like-button';
 import { CardContent } from '@/components/card/card-content';
 import { TagDisplay } from '@/components/tag-display';
+import { updateLiked } from '@/apis/twitch/post';
+import { CardEdit } from '@/components/card/card-edit';
 
 interface TwMainCardProps {
   id: number;
@@ -57,21 +59,7 @@ export const TwMainCard = ({
 
   const handleLikeClick = async (postId: number) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/twitch/like/${postId}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-
+      const data = await updateLiked(postId);
       setIsLiked(data['isLiked']);
       setLikeCount(data['likeCount'].length);
       toast.success('좋아요 성공');
@@ -80,6 +68,10 @@ export const TwMainCard = ({
       toast.error('로그인이 필요합니다.');
     }
   };
+
+  const handleEditPost = async () => {};
+
+  const handleDeletePost = async () => {};
 
   return (
     <section className='relative flex flex-col justify-between border border-black text-xs w-auto dark:border-white'>
@@ -111,10 +103,8 @@ export const TwMainCard = ({
         {copy && <div className='text-lg'>복사 완료</div>}
         {(IsAuthor || IsAdmin) && (
           <div className='flex gap-2'>
-            <Edit
-              className='w-6 h-6 hover:scale-125 cursor-pointer'
-              onClick={() => {}}
-            />
+            <CardEdit id={id} title={title} content={content} tags={tags} />
+
             <Trash2
               className='w-6 h-6 hover:scale-125 cursor-pointer'
               onClick={() => {}}

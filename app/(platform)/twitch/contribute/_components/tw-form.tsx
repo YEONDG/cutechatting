@@ -98,7 +98,7 @@ export const TwForm = ({ userId }: TwFormProps) => {
               <FormControl>
                 <Textarea
                   placeholder='내용'
-                  className='max-w-2xl text-xs bg-slate-300 dark:bg-slate-700'
+                  className='min-h-96 max-w-2xl text-xs bg-slate-300 dark:bg-slate-700'
                   {...field}
                 />
               </FormControl>

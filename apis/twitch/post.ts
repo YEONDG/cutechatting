@@ -1,6 +1,7 @@
+import { SubmissionRequest } from '@/lib/validators/submission';
 import { TwitchPostWithLikesWithTags } from '@/types/types';
 
-const BASE_URL = process.env.NEXTAUTH_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const getTwitchPosts = async (
   page: string,
@@ -27,7 +28,7 @@ export const getTotalPostsCount = async (): Promise<number> => {
   return data;
 };
 
-export const createTwitchPost = async (values: any) => {
+export const createTwitchPost = async (values: SubmissionRequest) => {
   const response = await fetch(`${BASE_URL}/api/twitch/contribute`, {
     method: 'POST',
     headers: {
@@ -53,6 +54,21 @@ export const getTagWithId = async (
   id: string
 ): Promise<TwitchPostWithLikesWithTags[]> => {
   const response = await fetch(`${BASE_URL}/api/twitch/tags/${id}`);
+  const data = await response.json();
+  return data;
+};
+
+export const updateLiked = async (postId: number) => {
+  const response = await fetch(`${BASE_URL}/api/twitch/like/${postId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
   const data = await response.json();
   return data;
 };
