@@ -39,7 +39,6 @@ export const TwMain = async ({ page, popular }: TwMainProps) => {
   const postsData = getTwitchPosts(page, popular);
 
   const [totalPostsCount, posts] = await Promise.all([postsCount, postsData]);
-  console.log(posts);
   return (
     <div className='flex flex-col justify-center'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 lg:px-0 h-full gap-4'>
@@ -56,6 +55,7 @@ export const TwMain = async ({ page, popular }: TwMainProps) => {
             tags={post.tags}
             username={post.author.username}
             approved={post.approved}
+            role={session?.user.role}
           />
         ))}
       </div>

@@ -25,12 +25,14 @@ export const TwAllMain = async ({ page }: TwAllMainProps) => {
             id={post.id}
             title={post.title}
             content={post.content}
+            authorId={post.userId}
             userId={userId}
             createdAt={post.createdAt}
             likes={post.likes}
             tags={post.tags}
             username={post.author.username}
             approved={post.approved}
+            role={session?.user.role}
           />
         ))}
       </div>

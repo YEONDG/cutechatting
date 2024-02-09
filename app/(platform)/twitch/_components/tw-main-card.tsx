@@ -1,26 +1,23 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  BadgeCheck,
-  ClipboardCopy,
-  Edit,
-  ThumbsUp,
-  Trash2,
-} from 'lucide-react';
+import { ClipboardCopy, Edit, Trash2 } from 'lucide-react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { toast } from 'sonner';
+import type { Like, Tag, UserRole } from '@prisma/client';
 
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { TagItem } from '@/components/tag-item';
 import { Separator } from '@/components/ui/separator';
-import type { Like, Tag } from '@prisma/client';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
+import { CardHeader } from '@/components/card/card-header';
+import { LikeButton } from '@/components/like-button';
+import { CardContent } from '@/components/card/card-content';
+import { TagDisplay } from '@/components/tag-display';
 
 interface TwMainCardProps {
   id: number;
   title: string;
-  content: string | null;
+  content: string;
   authorId: string;
   userId?: string;
   createdAt: Date;
@@ -28,6 +25,7 @@ interface TwMainCardProps {
   tags?: Tag[];
   username: string;
   approved: boolean;
+  role?: UserRole;
 }
 
 export const TwMainCard = ({
@@ -41,25 +39,21 @@ export const TwMainCard = ({
   tags = [],
   username,
   approved,
+  role = 'USER',
 }: TwMainCardProps) => {
-  const [copy, setCopy] = useState(false);
+  const { copy, onCopySuccess } = useCopyToClipboard();
   const [isLiked, setIsLiked] = useState(
     likes.some((item) => item.userId === userId)
   );
   const [likeCount, setLikeCount] = useState(likes.length);
 
   const createdDate = new Date(createdAt).toLocaleDateString();
+  const IsAuthor = authorId === userId;
+  const IsAdmin = role === 'ADMIN';
 
   useEffect(() => {
     setIsLiked(likes.some((item) => item.userId === userId));
   }, [likes, userId]);
-
-  const onCopySuccess = () => {
-    setCopy(true);
-    setTimeout(() => {
-      setCopy(false);
-    }, 1000);
-  };
 
   const handleLikeClick = async (postId: number) => {
     try {
@@ -88,44 +82,24 @@ export const TwMainCard = ({
   };
 
   return (
-    <div className='flex flex-col justify-between border border-black text-xs w-auto dark:border-white'>
-      <div className='h-20'>
-        <div className='flex justify-between items-center mx-4 mt-2'>
-          <BadgeCheck
-            className={cn(`hidden`, { 'block text-green-500': approved })}
-          />
-          <h2 className='text-2xl font-bold'>{title}</h2>
-          <Button
-            onClick={() => handleLikeClick(id)}
-            size='sm'
-            variant='ghost'
-            className={cn(
-              'flex items-center gap-2 hover:bg-red-500 rounded-xl',
-              {
-                'bg-red-500': isLiked,
-              }
-            )}
-          >
-            <ThumbsUp className='w-6 h-6' />
-            {likeCount}
-          </Button>
-        </div>
-        <div className='flex justify-between mx-4 my-1 text-sm '>
-          <div className='text-slate-500'>
-            {createdDate} / {username}
-          </div>
-          <p className='text-sm'>{id}번</p>
-        </div>
+    <section className='relative flex flex-col justify-between border border-black text-xs w-auto dark:border-white'>
+      <CardHeader
+        id={id}
+        title={title}
+        username={username}
+        createdDate={createdDate}
+        approved={approved}
+      />
+      <div className='absolute top-2 right-0'>
+        <LikeButton
+          isLiked={isLiked}
+          likeCount={likeCount}
+          onLikeClick={() => handleLikeClick(id)}
+        />
       </div>
       <Separator className='mb-2' />
-      <p className='flex items-center h-full text-xs text-center overflow-hidden max-w-sm '>
-        {content}
-      </p>
-      <div className='flex m-2'>
-        {tags.map((tag) => (
-          <TagItem key={tag.id} id={tag.id} name={tag.name} />
-        ))}
-      </div>
+      <CardContent content={content} />
+      <TagDisplay tags={tags} />
       <Separator />
       <div className='flex justify-between items-center mx-4 my-2 gap-4'>
         <CopyToClipboard text={content ?? ''} onCopy={onCopySuccess}>
@@ -135,7 +109,7 @@ export const TwMainCard = ({
           </Button>
         </CopyToClipboard>
         {copy && <div className='text-lg'>복사 완료</div>}
-        {authorId === userId && (
+        {(IsAuthor || IsAdmin) && (
           <div className='flex gap-2'>
             <Edit
               className='w-6 h-6 hover:scale-125 cursor-pointer'
@@ -148,6 +122,6 @@ export const TwMainCard = ({
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
