@@ -13,7 +13,7 @@ const noto_sans = Noto_Sans_KR({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
   description: siteConfig.description,
-  icons: [{ url: 'logo.svg', href: 'logo.svg' }],
+  icons: [{ url: '/images/favicon.ico', href: '/images/favicon.ico' }],
 };
 
 export default async function RootLayout({
@@ -22,7 +22,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang='kr'>
       <body className={noto_sans.className} suppressHydrationWarning={true}>
         <Providers>
           <ThemeProvider
