@@ -29,12 +29,44 @@ export const getTotalPostsCount = async (): Promise<number> => {
 };
 
 export const createTwitchPost = async (values: SubmissionRequest) => {
-  const response = await fetch(`${BASE_URL}/api/twitch/contribute`, {
+  const response = await fetch(`${BASE_URL}/api/twitch/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(values),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data;
+};
+
+export const editTwitchPost = async (values: SubmissionRequest) => {
+  const response = await fetch(`${BASE_URL}/api/twitch/posts`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(values),
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data;
+};
+
+export const deleteTwitchPost = async (id: number) => {
+  const response = await fetch(`${BASE_URL}/api/twitch/posts`, {
+    method: 'delete',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: id }),
   });
 
   if (!response.ok) {

@@ -14,7 +14,8 @@ import { LikeButton } from '@/components/like-button';
 import { CardContent } from '@/components/card/card-content';
 import { TagDisplay } from '@/components/tag-display';
 import { updateLiked } from '@/apis/twitch/post';
-import { CardEdit } from '@/components/card/card-edit';
+import { CardEditBtn } from '@/components/card/card-edit-btn';
+import { CardDeleteBtn } from '@/components/card/card-delete-btn';
 
 interface TwMainCardProps {
   id: number;
@@ -69,10 +70,6 @@ export const TwMainCard = ({
     }
   };
 
-  const handleEditPost = async () => {};
-
-  const handleDeletePost = async () => {};
-
   return (
     <section className='relative flex flex-col justify-between border border-black text-xs w-auto dark:border-white'>
       <CardHeader
@@ -103,12 +100,15 @@ export const TwMainCard = ({
         {copy && <div className='text-lg'>복사 완료</div>}
         {(IsAuthor || IsAdmin) && (
           <div className='flex gap-2'>
-            <CardEdit id={id} title={title} content={content} tags={tags} />
-
-            <Trash2
-              className='w-6 h-6 hover:scale-125 cursor-pointer'
-              onClick={() => {}}
+            <CardEditBtn
+              postId={id}
+              title={title}
+              content={content}
+              tags={tags}
+              userId={userId}
             />
+
+            <CardDeleteBtn postId={id} />
           </div>
         )}
       </div>

@@ -106,14 +106,14 @@ export const TwForm = ({ userId }: TwFormProps) => {
             </FormItem>
           )}
         />
-        <div className=''>
+        <div>
           {fields.map((field, index) => (
             <FormField
               key={field.id}
               control={form.control}
               name={`tags.${index}.tag`}
               render={({ field }) => (
-                <FormItem className=''>
+                <FormItem>
                   <FormLabel className={cn(index !== 0 && 'sr-only')}>
                     태그
                   </FormLabel>

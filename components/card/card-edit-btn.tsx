@@ -1,8 +1,9 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -17,10 +18,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Edit, Plus, X } from 'lucide-react';
 import { Textarea } from '../ui/textarea';
-import { TagDisplay } from '../tag-display';
 import { Tag } from '@prisma/client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useFieldArray, useForm } from 'react-hook-form';
@@ -29,28 +28,37 @@ import {
   SubmissionValidator,
 } from '@/lib/validators/submission';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
+import { editTwitchPost } from '@/apis/twitch/post';
+import { useRouter } from 'next/navigation';
 
 interface CardEditProps {
-  id: number;
+  postId: number;
   title: string;
   content: string;
   tags?: Tag[];
+  userId?: string;
 }
 
-export const CardEdit = ({
-  id,
+export const CardEditBtn = ({
+  postId,
   title: initialTitle,
   content: initialContent,
   tags: initialTags,
+  userId,
 }: CardEditProps) => {
+  const router = useRouter();
+
   const defaultTags = initialTags?.map((item) => ({
     tag: item.name,
   }));
+
   const defaultFormValues = {
     title: initialTitle,
     content: initialContent,
     tags: defaultTags,
   };
+
   const form = useForm<SubmissionRequest>({
     resolver: zodResolver(SubmissionValidator),
     defaultValues: defaultFormValues,
@@ -61,21 +69,33 @@ export const CardEdit = ({
     name: 'tags',
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // 여기에 수정 로직 추가
+  const onSubmit = async (values: SubmissionRequest) => {
+    if (!userId) {
+      return toast.error('로그인이 필요합니다.');
+    }
+    try {
+      const valuesWithId = { postId, ...values };
+      const response = await editTwitchPost(valuesWithId);
+      toast.success(response);
+      router.refresh();
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error('게시글 작성 실패 ' + err.message);
+      }
+    }
   };
+
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Edit className='w-6 h-6 hover:scale-125 cursor-pointer' />
-          </DialogTrigger>
-          <DialogContent className='sm:max-w-3xl'>
-            <DialogHeader>
-              <DialogTitle>수정하기</DialogTitle>
-            </DialogHeader>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Edit className='w-6 h-6 hover:scale-125 cursor-pointer' />
+      </DialogTrigger>
+      <DialogContent className='sm:max-w-3xl'>
+        <DialogHeader>
+          <DialogTitle>수정하기</DialogTitle>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
             <div className='flex flex-col gap-4 py-4'>
               <FormField
                 control={form.control}
@@ -111,14 +131,14 @@ export const CardEdit = ({
                   </FormItem>
                 )}
               />
-              <div className=''>
+              <div>
                 {fields.map((field, index) => (
                   <FormField
                     key={field.id}
                     control={form.control}
                     name={`tags.${index}.tag`}
                     render={({ field }) => (
-                      <FormItem className=''>
+                      <FormItem>
                         <FormLabel className={cn(index !== 0 && 'sr-only')}>
                           태그
                         </FormLabel>
@@ -158,9 +178,9 @@ export const CardEdit = ({
             <DialogFooter>
               <Button type='submit'>수정하기</Button>
             </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </form>
-    </Form>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 };
