@@ -1,15 +1,16 @@
 import { SubmissionRequest } from '@/lib/validators/submission';
 import { TwitchPostWithLikesWithTags } from '@/types/types';
-
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+import { BASE_URL } from '..';
 
 export const getTwitchPosts = async (
   page: string,
   popular: boolean = false,
   approved: boolean = true
 ): Promise<TwitchPostWithLikesWithTags[]> => {
+  const popularStr = popular.toString();
+  const approvedStr = approved.toString();
   const response = await fetch(
-    `${BASE_URL}/api/twitch?page=${page}&popular=${popular.toString()}&approved=${approved.toString()}`
+    `${BASE_URL}/api/twitch?page=${page}&popular=${popularStr}&approved=${approvedStr}`
   );
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
