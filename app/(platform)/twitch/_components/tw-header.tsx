@@ -18,7 +18,7 @@ export const TwHeader = () => {
   const popularLink = isPopular ? '/twitch' : '/twitch?popular=true';
 
   return (
-    <div className='flex flex-wrap gap-2 mx-2'>
+    <div className='flex flex-wrap gap-2 px-2'>
       <TwChatComponent />
       <Button asChild>
         <Link href={'/twitch'}>최신순</Link>

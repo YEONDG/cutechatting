@@ -25,7 +25,6 @@ interface ProfileFormProps {
 
 export const ProfileForm = ({ user }: ProfileFormProps) => {
   const router = useRouter();
-  console.log(user);
 
   const form = useForm<UsernameRequest>({
     resolver: zodResolver(UsernameValidator),

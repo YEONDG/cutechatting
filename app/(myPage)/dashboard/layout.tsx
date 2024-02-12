@@ -17,14 +17,14 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className='container'>
+    <section className='px-2'>
       <h2 className='text-3xl'>대시보드</h2>
       <Separator className='my-4' />
       <div className='flex flex-col lg:flex-row lg:space-x-12 lg:space-y-0'>
         <aside className='-mx-4 lg:w-1/5'>
           <SidebarNav items={sidebarNavItems} />
         </aside>
-        <div className='flex-1 lg:max-w-6xl'>{children}</div>
+        <div className='flex-1 lg:max-w-2xl'>{children}</div>
       </div>
     </section>
   );

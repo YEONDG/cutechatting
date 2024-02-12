@@ -7,20 +7,10 @@ export async function GET(
 ) {
   try {
     const { userId } = params;
-    const { searchParams } = new URL(req.url);
-
-    const page = searchParams.get('page') ?? '1';
 
     if (!userId) return new NextResponse('userId가 없습니다!', { status: 400 });
 
-    if (page === '0')
-      return new NextResponse('post가 없습니다!', { status: 400 });
-
-    const pageNumber = Number(page);
-
     const twitchPosts = await db.twitchPost.findMany({
-      skip: (pageNumber - 1) * 6,
-      take: 6,
       where: {
         likes: {
           some: {

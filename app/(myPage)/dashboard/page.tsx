@@ -15,7 +15,7 @@ const DashboardPage = async ({
   }
 
   return (
-    <div className='w-full'>
+    <div className='flex flex-col'>
       <div>환영합니다. {session.user.username}님!</div>
       <div className='text-3xl mb-4'>나의 좋아요 목록</div>
       <div className='flex flex-col justify-center items-center gap-4'>

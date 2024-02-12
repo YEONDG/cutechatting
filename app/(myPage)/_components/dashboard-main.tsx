@@ -3,7 +3,6 @@ import {
   getTotalLikePostsCount,
 } from '@/apis/dashboard/dashboard';
 import { TwMainCard } from '@/app/(platform)/twitch/_components/tw-main-card';
-import { TwMainPagenation } from '@/app/(platform)/twitch/_components/tw-main-pagination';
 import { TwitchPostWithLikesWithTags } from '@/types/types';
 
 interface DashboardMainProps {
@@ -14,11 +13,9 @@ interface DashboardMainProps {
 export const DashboardMain = async ({ userId, page }: DashboardMainProps) => {
   const posts: TwitchPostWithLikesWithTags[] = await getLikePosts(userId);
 
-  const totalLikePostsCount = await getTotalLikePostsCount(userId);
-
   return (
     <div className='flex flex-col justify-center items-center'>
-      <div className='grid grid-cols-1 md:grid-cols-2 w-full  h-full gap-4 mx-4'>
+      <div className='grid grid-cols-1 md:grid-cols-2 w-full h-full gap-4 md:gap-20'>
         {posts?.map((post) => (
           <TwMainCard
             key={post.id}
@@ -33,9 +30,6 @@ export const DashboardMain = async ({ userId, page }: DashboardMainProps) => {
             approved={post.approved}
           />
         ))}
-      </div>
-      <div className='p-10'>
-        <TwMainPagenation postsCount={totalLikePostsCount} />
       </div>
     </div>
   );

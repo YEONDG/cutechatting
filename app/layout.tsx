@@ -37,7 +37,9 @@ export default async function RootLayout({
             <div className='flex flex-col justify-center sm:items-center mx-auto h-full'>
               <Navbar session={session} />
               <Toaster richColors />
-              <main className='max-w-7xl pt-20 pb-20 h-full'>{children}</main>
+              <main className='flex flex-col pt-20 pb-20 h-full'>
+                {children}
+              </main>
             </div>
             <SpeedInsights />
           </ThemeProvider>
