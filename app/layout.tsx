@@ -1,5 +1,6 @@
 import { Toaster } from 'sonner';
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { siteConfig } from '@/config/site';
 import { Navbar } from '@/components/layout/navbar';
 import Providers from '@/components/provider';
@@ -38,6 +39,7 @@ export default async function RootLayout({
                 {children}
               </main>
             </div>
+            <SpeedInsights />
           </ThemeProvider>
         </Providers>
       </body>
