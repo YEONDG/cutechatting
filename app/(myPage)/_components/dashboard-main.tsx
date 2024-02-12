@@ -17,8 +17,8 @@ export const DashboardMain = async ({ userId, page }: DashboardMainProps) => {
   const totalLikePostsCount = await getTotalLikePostsCount(userId);
 
   return (
-    <div className='flex flex-col justify-center'>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 lg:px-0 h-full gap-4'>
+    <div className='flex flex-col justify-center items-center'>
+      <div className='grid grid-cols-1 md:grid-cols-2 w-full  h-full gap-4 mx-4'>
         {posts?.map((post) => (
           <TwMainCard
             key={post.id}
@@ -37,7 +37,6 @@ export const DashboardMain = async ({ userId, page }: DashboardMainProps) => {
       <div className='p-10'>
         <TwMainPagenation postsCount={totalLikePostsCount} />
       </div>
-      {totalLikePostsCount}
     </div>
   );
 };
