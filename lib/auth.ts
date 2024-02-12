@@ -5,9 +5,10 @@ import NaverProvider from 'next-auth/providers/naver';
 import GoogleProvider from 'next-auth/providers/google';
 import { db } from './db';
 import { PrismaAdapter } from '@auth/prisma-adapter';
+import { Adapter } from 'next-auth/adapters';
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(db),
+  adapter: PrismaAdapter(db) as Adapter,
   providers: [
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,

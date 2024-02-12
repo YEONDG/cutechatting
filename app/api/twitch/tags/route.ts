@@ -1,4 +1,5 @@
 import { db } from '@/lib/db';
+import { Tag } from '@prisma/client';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
@@ -9,7 +10,7 @@ export async function GET(req: Request) {
       },
     });
 
-    const twitchTagsWithPostCount = twitchTags.map((tag) => ({
+    const twitchTagsWithPostCount = twitchTags.map((tag: Tag) => ({
       ...tag,
       postCount: tag.posts.length,
     }));
