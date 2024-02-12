@@ -6,7 +6,7 @@ export const TwTagList = async () => {
   const tags: TwitchTagWithPostsWithPostCount[] = await getTwitchTagList();
   return (
     <div className='mt-10'>
-      <div className='flex gap-4'>
+      <div className='flex flex-wrap mx-2 gap-2 sm:gap-4'>
         {tags.map((tag) => (
           <TagItem
             key={tag.id}

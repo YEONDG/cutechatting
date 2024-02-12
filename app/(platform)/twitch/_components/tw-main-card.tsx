@@ -71,7 +71,7 @@ export const TwMainCard = ({
   };
 
   return (
-    <section className='relative flex flex-col justify-between border border-black text-xs w-auto dark:border-white'>
+    <section className='relative flex flex-col justify-between border max-w-[360px] mx-auto border-black text-xs  dark:border-white'>
       <CardHeader
         id={id}
         title={title}

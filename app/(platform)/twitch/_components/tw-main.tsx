@@ -18,8 +18,8 @@ export const TwMain = async ({ page, popular }: TwMainProps) => {
 
   const [totalPostsCount, posts] = await Promise.all([postsCount, postsData]);
   return (
-    <div className='flex flex-col justify-center'>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 lg:px-0 h-full gap-4'>
+    <div className='flex flex-col justify-center items-center'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full lg:px-0 h-full gap-4'>
         {posts?.map((post) => (
           <TwMainCard
             key={post.id}

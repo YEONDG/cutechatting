@@ -35,15 +35,13 @@ export async function GET(req: NextRequest) {
             id: 'desc' as const,
           };
 
-    console.log('-----측정시작 ------');
-    console.time('time');
     const twitchPosts = await db.twitchPost.findMany({
       where: whereCondition,
       skip: skip,
-      take: 6,
+      take: ITEMS_PER_PAGE,
       orderBy: orderBy,
       include: {
-        likes: popular === 'true',
+        likes: true,
         tags: true,
         author: {
           select: {
@@ -52,7 +50,6 @@ export async function GET(req: NextRequest) {
         },
       },
     });
-    console.timeEnd('time');
 
     return NextResponse.json(twitchPosts);
   } catch (error) {
