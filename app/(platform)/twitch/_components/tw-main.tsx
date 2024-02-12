@@ -8,6 +8,7 @@ interface TwMainProps {
   popular: boolean;
 }
 
+export const dynamic = 'force-dynamic';
 export const TwMain = async ({ page, popular }: TwMainProps) => {
   const session = await getAuthSession();
   const userId = session?.user.id;
