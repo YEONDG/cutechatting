@@ -15,7 +15,7 @@ export const Navbar = ({ session }: NavBarProps) => {
   const pathname = usePathname();
 
   return (
-    <div className='fixed top-0 w-full h-14 px-4 border-b shadow-sm bg-white flex items-center z-10 dark:bg-black'>
+    <div className='fixed top-0 w-full h-14 px-4 border-b shadow-sm bg-white flex justify-center items-center z-10 mx-auto dark:bg-black'>
       <div className='w-full md:max-w-screen-2xl flex items-center justify-between '>
         <div>
           <Link href='/' className='flex items-center'>
