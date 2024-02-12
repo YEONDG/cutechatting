@@ -17,6 +17,7 @@ export async function GET(req: NextRequest) {
     const ITEMS_PER_PAGE = 6;
     const pageNumber = Number(page);
     const whereCondition = approved === 'true' ? { approved: true } : {};
+    const skip = (pageNumber - 1) * ITEMS_PER_PAGE;
 
     const orderBy =
       popular === 'true'
@@ -34,13 +35,15 @@ export async function GET(req: NextRequest) {
             id: 'desc' as const,
           };
 
+    console.log('-----측정시작 ------');
+    console.time('time');
     const twitchPosts = await db.twitchPost.findMany({
       where: whereCondition,
-      skip: (pageNumber - 1) * ITEMS_PER_PAGE,
+      skip: skip,
       take: 6,
       orderBy: orderBy,
       include: {
-        likes: true,
+        likes: popular === 'true',
         tags: true,
         author: {
           select: {
@@ -49,6 +52,7 @@ export async function GET(req: NextRequest) {
         },
       },
     });
+    console.timeEnd('time');
 
     return NextResponse.json(twitchPosts);
   } catch (error) {
