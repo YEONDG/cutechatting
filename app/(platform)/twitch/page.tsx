@@ -13,9 +13,7 @@ const TwitchPage = async ({
   return (
     <div className='flex flex-col justify-center items-center gap-4'>
       <TwHeader />
-      <Suspense fallback={<TwMain.Skeleton />}>
-        <TwMain page={page} popular={popular} />
-      </Suspense>
+      <TwMain page={page} popular={popular} />
     </div>
   );
 };

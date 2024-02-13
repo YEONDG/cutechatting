@@ -1,8 +1,8 @@
-import React from 'react';
 import { TwMainCard } from '../../_components/tw-main-card';
 import { getAuthSession } from '@/lib/auth';
 import { TwMainPagenation } from '../../_components/tw-main-pagination';
 import { getTotalPostsCount, getTwitchPosts } from '@/apis/twitch/post';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface TwAllMainProps {
   page: string;
@@ -39,6 +39,19 @@ export const TwAllMain = async ({ page }: TwAllMainProps) => {
       <div className='p-10'>
         <TwMainPagenation postsCount={totalPostsCount} url={'/twitch/all'} />
       </div>
+    </div>
+  );
+};
+
+TwAllMain.Skeleton = function TwMainSkeleton() {
+  return (
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 lg:px-0 h-full gap-4'>
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
     </div>
   );
 };

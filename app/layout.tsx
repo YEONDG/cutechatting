@@ -8,7 +8,6 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Noto_Sans_KR } from 'next/font/google';
 import './globals.css';
 import type { Metadata } from 'next';
-import { getAuthSession } from '@/lib/auth';
 
 const noto_sans = Noto_Sans_KR({ subsets: ['latin'] });
 
@@ -23,7 +22,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getAuthSession();
   return (
     <html lang='kr'>
       <body className={noto_sans.className} suppressHydrationWarning={true}>
@@ -35,7 +33,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <div className='flex flex-col justify-center sm:items-center mx-auto h-full'>
-              <Navbar session={session} />
+              <Navbar />
               <Toaster richColors />
               <main className='flex flex-col pt-20 pb-20 h-full'>
                 {children}
