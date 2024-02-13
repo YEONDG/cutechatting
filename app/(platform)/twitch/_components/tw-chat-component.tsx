@@ -45,8 +45,8 @@ export const TwChatComponent = () => {
         <SheetHeader>
           <SheetTitle>트위치 채팅창</SheetTitle>
         </SheetHeader>
-        <div className='flex flex-col h-full'>
-          <div className='flex flex-col w-[340px] border-x border-x-black h-full'>
+        <div className='flex flex-col h-full -ml-7 sm:ml-0'>
+          <div className='flex flex-col w-[300px] sm:w-[340px] border-x border-x-black h-full'>
             {/* 헤더 */}
             <TwChatHeader />
             {/* 채팅스크롤 */}

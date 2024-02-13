@@ -8,7 +8,7 @@ interface TwChatItemsProps {
 
 export const TwChatItems = ({ chatList }: TwChatItemsProps) => {
   return (
-    <div className='flex flex-col-reverse justify-start w-full h-full py-2 overflow-y-auto'>
+    <div className='flex flex-col-reverse justify-start w-full h-full py-2 overflow-y-auto overflow-x-hidden'>
       {chatList.map((chat) => (
         <TwChatItem key={chat.id} message={chat.message} />
       ))}
