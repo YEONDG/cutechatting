@@ -24,7 +24,10 @@ export default async function RootLayout({
 }) {
   return (
     <html lang='kr'>
-      <body className={noto_sans.className} suppressHydrationWarning={true}>
+      <body
+        className={`${noto_sans.className} antialiased`}
+        suppressHydrationWarning={true}
+      >
         <Providers>
           <ThemeProvider
             attribute='class'
@@ -32,10 +35,10 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className='flex flex-col justify-center sm:items-center mx-auto h-full'>
+            <div className='flex flex-col justify-center sm:items-center w-full mx-auto h-full'>
               <Navbar />
               <Toaster richColors />
-              <main className='flex flex-col pt-20 pb-20 h-full'>
+              <main className='flex flex-col pt-20 pb-20 w-full h-full'>
                 {children}
               </main>
             </div>

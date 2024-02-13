@@ -17,7 +17,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className='px-2'>
+    <section className='container w-full px-2'>
       <h2 className='text-3xl'>대시보드</h2>
       <Separator className='my-4' />
       <div className='flex flex-col lg:flex-row lg:space-x-12 lg:space-y-0'>
