@@ -2,6 +2,7 @@ import { TwMainPagenation } from './tw-main-pagination';
 import { TwMainCard } from './tw-main-card';
 import { getAuthSession } from '@/lib/auth';
 import { getTotalPostsCount, getTwitchPosts } from '@/apis/twitch/post';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface TwMainProps {
   page: string;
@@ -40,6 +41,19 @@ export const TwMain = async ({ page, popular }: TwMainProps) => {
       <div className='py-8'>
         <TwMainPagenation postsCount={totalPostsCount} url={'/twitch'} />
       </div>
+    </div>
+  );
+};
+
+TwMain.Skeleton = function TwMainSkeleton() {
+  return (
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-0 h-full lg:gap-4'>
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
     </div>
   );
 };

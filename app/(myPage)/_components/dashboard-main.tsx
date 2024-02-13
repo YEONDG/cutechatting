@@ -3,6 +3,7 @@ import {
   getTotalLikePostsCount,
 } from '@/apis/dashboard/dashboard';
 import { TwMainCard } from '@/app/(platform)/twitch/_components/tw-main-card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { TwitchPostWithLikesWithTags } from '@/types/types';
 
 interface DashboardMainProps {
@@ -31,6 +32,19 @@ export const DashboardMain = async ({ userId, page }: DashboardMainProps) => {
           />
         ))}
       </div>
+    </div>
+  );
+};
+
+DashboardMain.Skeleton = function DashboardMainSkeleton() {
+  return (
+    <div className='grid grid-cols-1 md:grid-cols-2 w-full h-full gap-4 md:gap-20'>
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+      <Skeleton className='aspect-video h-[506px] w-[350px]' />
     </div>
   );
 };
