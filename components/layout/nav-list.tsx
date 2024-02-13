@@ -4,10 +4,14 @@ import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { SignOutButton } from './sign-out-button';
 import Link from 'next/link';
+import { Session } from '@prisma/client';
 
-const NavList = () => {
+interface NavListProps {
+  session: Session;
+}
+
+const NavList = ({ session }: NavListProps) => {
   const pathname = usePathname();
-  const session = useSession();
   return (
     <div className='flex gap-2 items-center'>
       <ModeToggle />
