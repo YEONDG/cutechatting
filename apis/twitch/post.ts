@@ -1,6 +1,7 @@
 import { SubmissionRequest } from '@/lib/validators/submission';
 import { TwitchPostWithLikesWithTags } from '@/types/types';
 import { BASE_URL } from '..';
+import { unstable_noStore } from 'next/cache';
 
 export const getTwitchPosts = async (
   page: string,

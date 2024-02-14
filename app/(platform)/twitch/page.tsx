@@ -1,6 +1,5 @@
 import { TwMain } from './_components/tw-main';
 import { TwHeader } from './_components/tw-header';
-import { Suspense } from 'react';
 
 export const dynamic = 'force-dynamic';
 const TwitchPage = async ({

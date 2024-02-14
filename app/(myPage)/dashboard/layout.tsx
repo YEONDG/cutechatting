@@ -24,7 +24,7 @@ export default function DashboardLayout({
         <aside className='-mx-4 lg:w-1/5'>
           <SidebarNav items={sidebarNavItems} />
         </aside>
-        <div className='flex-1 lg:max-w-2xl'>{children}</div>
+        <div className='flex-1 lg:w-4/5'>{children}</div>
       </div>
     </section>
   );

@@ -2,7 +2,6 @@ import { TwMainPagenation } from './tw-main-pagination';
 import { TwMainCard } from './tw-main-card';
 import { getAuthSession } from '@/lib/auth';
 import { getTotalPostsCount, getTwitchPosts } from '@/apis/twitch/post';
-import { Skeleton } from '@/components/ui/skeleton';
 
 interface TwMainProps {
   page: string;
@@ -18,6 +17,8 @@ export const TwMain = async ({ page, popular }: TwMainProps) => {
   const postsData = getTwitchPosts(page, popular);
 
   const [totalPostsCount, posts] = await Promise.all([postsCount, postsData]);
+  console.log(posts);
+
   return (
     <div className='flex flex-col justify-center items-center w-full'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-0 h-full lg:gap-4'>
