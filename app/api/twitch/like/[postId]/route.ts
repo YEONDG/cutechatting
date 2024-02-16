@@ -6,25 +6,28 @@ export async function PATCH(
   { params }: { params: { postId: string } }
 ) {
   try {
-    const { postId } = params;
+    const postId = Number(params.postId);
 
-    const postIdNumber = Number(postId);
+    if (isNaN(postId)) {
+      return new Response('Invalid post ID', { status: 400 });
+    }
 
     const session = await getAuthSession();
 
     if (!session?.user) {
       return new Response('Unauthorized', { status: 401 });
     }
+
     const existingLike = await db.like.findFirst({
       where: {
         userId: session?.user.id,
-        postId: postIdNumber,
+        postId: postId,
       },
     });
 
     const post = await db.twitchPost.findUnique({
       where: {
-        id: postIdNumber,
+        id: postId,
       },
       include: {
         author: true,
@@ -45,7 +48,7 @@ export async function PATCH(
 
       const likeCount = await db.like.findMany({
         where: {
-          postId: postIdNumber,
+          postId: postId,
         },
       });
 
@@ -57,13 +60,13 @@ export async function PATCH(
     await db.like.create({
       data: {
         userId: session?.user.id,
-        postId: postIdNumber,
+        postId: postId,
       },
     });
 
     const likeCount = await db.like.findMany({
       where: {
-        postId: postIdNumber,
+        postId: postId,
       },
     });
     return new Response(JSON.stringify({ isLiked: true, likeCount }), {

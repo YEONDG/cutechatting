@@ -17,7 +17,6 @@ export const TwMain = async ({ page, popular }: TwMainProps) => {
   const postsData = getTwitchPosts(page, popular);
 
   const [totalPostsCount, posts] = await Promise.all([postsCount, postsData]);
-  console.log(posts);
 
   return (
     <div className='flex flex-col justify-center items-center w-full'>
