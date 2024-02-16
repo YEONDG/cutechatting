@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { signIn } from 'next-auth/react';
 import { toast } from 'sonner';
 
-const UserAuthForm = () => {
+const UserAuthForm = ({ text }: { text: string }) => {
   const loginWithKakao = async () => {
     try {
       await signIn('kakao');
@@ -28,9 +28,9 @@ const UserAuthForm = () => {
   };
   return (
     <div className='flex flex-col gap-2'>
-      <Button onClick={loginWithKakao}>카카오로그인</Button>
-      <Button onClick={loginWithGoogle}>구글로그인</Button>
-      <Button onClick={loginWithNaver}>네이버로그인</Button>
+      <Button onClick={loginWithKakao}>카카오 {text}</Button>
+      <Button onClick={loginWithGoogle}>구글 {text}</Button>
+      <Button onClick={loginWithNaver}>네이버 {text}</Button>
     </div>
   );
 };

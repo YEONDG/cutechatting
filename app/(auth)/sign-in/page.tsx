@@ -1,9 +1,4 @@
 import SignIn from '@/app/(auth)/_components/sign-in';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { ChevronLeft } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
 
 const SignInPage = () => {
   return (
