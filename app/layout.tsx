@@ -6,6 +6,7 @@ import { Navbar } from '@/components/layout/navbar';
 import Providers from '@/components/provider';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Noto_Sans_KR } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import type { Metadata } from 'next';
 
@@ -40,6 +41,7 @@ export default async function RootLayout({
               <Toaster richColors />
               <main className='flex flex-col pt-20 pb-20 w-full h-full'>
                 {children}
+                <Analytics />
               </main>
             </div>
             <SpeedInsights />
