@@ -13,20 +13,18 @@ const navLinks = [
 const NavList = () => {
   const pathname = usePathname();
   return (
-    <div className='flex gap-2 items-center'>
+    <ul className='flex gap-2 items-center'>
       {navLinks.map((link) => {
         const isActive = pathname.startsWith(link.href);
         return (
-          <Link
-            key={link.name}
-            className={isActive ? 'font-bold' : ''}
-            href={link.href}
-          >
-            {link.name}
-          </Link>
+          <li key={link.name}>
+            <Link className={isActive ? 'font-bold' : ''} href={link.href}>
+              {link.name}
+            </Link>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
 

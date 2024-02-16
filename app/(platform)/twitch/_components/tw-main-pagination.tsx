@@ -24,7 +24,6 @@ export const TwMainPagenation = ({
 }: TwMainPagenationProps) => {
   const searchParams = useSearchParams();
   const isPopular = searchParams.get('popular') ? true : false;
-  console.log(isPopular, 'isPopular');
   const page = searchParams.get('page') ?? '1';
   const pageNumber = Number(page);
   const totalPage = Math.ceil(postsCount / 6);
