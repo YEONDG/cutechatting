@@ -12,7 +12,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import { useIsPopularStore } from '@/store/useIsPopularStore';
 
 interface TwMainPagenationProps {
   postsCount: number;
@@ -23,9 +22,9 @@ export const TwMainPagenation = ({
   postsCount,
   url = '/twitch',
 }: TwMainPagenationProps) => {
-  const { isPopular } = useIsPopularStore();
-
   const searchParams = useSearchParams();
+  const isPopular = searchParams.get('popular') ? true : false;
+  console.log(isPopular, 'isPopular');
   const page = searchParams.get('page') ?? '1';
   const pageNumber = Number(page);
   const totalPage = Math.ceil(postsCount / 6);
