@@ -1,4 +1,5 @@
 import { ThumbsUp } from 'lucide-react';
+import { Button } from './ui/button';
 
 interface LikeButtonProps {
   isLiked: boolean;
@@ -12,18 +13,16 @@ export const LikeButton = ({
   onLikeClick,
 }: LikeButtonProps) => {
   return (
-    <div className='flex justify-end mr-2'>
-      <button
-        onClick={onLikeClick}
-        className={`flex items-center gap-2 px-2 py-1 rounded-xl ${
-          isLiked
-            ? 'bg-red-500 text-white'
-            : 'bg-gray-200 text-black hover:bg-gray-300'
-        }`}
-      >
-        <ThumbsUp className='w-6 h-6' />
-        <span>{likeCount}</span>
-      </button>
-    </div>
+    <Button
+      onClick={onLikeClick}
+      className={`flex items-center gap-2 px-3 rounded-xl ${
+        isLiked
+          ? 'bg-primary text-white'
+          : 'bg-gray-200 text-black hover:bg-gray-300'
+      }`}
+    >
+      <ThumbsUp className='w-6 h-6' />
+      <span>{likeCount}</span>
+    </Button>
   );
 };

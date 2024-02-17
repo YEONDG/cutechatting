@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-const navLinks = [
+export const navLinks = [
   { name: '트위치', href: '/twitch' },
   { name: '치지직', href: '/chzzk' },
   { name: '아프리카', href: '/afreeca' },
@@ -13,7 +13,7 @@ const navLinks = [
 const NavList = () => {
   const pathname = usePathname();
   return (
-    <ul className='flex gap-2 items-center'>
+    <ul className='flex gap-2 justify-center items-center text-xl'>
       {navLinks.map((link) => {
         const isActive = pathname.startsWith(link.href);
         return (

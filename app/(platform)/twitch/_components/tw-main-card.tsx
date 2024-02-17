@@ -52,7 +52,7 @@ export const TwMainCard = ({
   const IsAdmin = role === 'ADMIN';
 
   return (
-    <section className='relative flex flex-col justify-between border max-w-[350px] mx-auto border-black text-xs  dark:border-white'>
+    <section className='relative flex flex-col justify-between border max-w-[280px] sm:max-w-[350px] mx-auto border-black text-xxs sm:text-xs dark:border-white'>
       <CardHeader
         id={id}
         title={title}
@@ -60,7 +60,7 @@ export const TwMainCard = ({
         createdDate={createdDate}
         approved={approved}
       />
-      <div className='absolute top-2 right-0'>
+      <div className='absolute top-2 right-2'>
         <LikeButton
           isLiked={isLiked}
           likeCount={likeCount}

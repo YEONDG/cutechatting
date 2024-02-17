@@ -20,7 +20,7 @@ export const TwMain = async ({ page, popular }: TwMainProps) => {
 
   return (
     <div className='flex flex-col justify-center items-center w-full'>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:px-0 h-full lg:gap-4'>
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 lg:px-0 h-full lg:gap-4'>
         {posts?.map((post) => (
           <TwMainCard
             key={post.id}

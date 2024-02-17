@@ -38,12 +38,12 @@ export default async function RootLayout({
           >
             <div className='flex flex-col justify-center sm:items-center w-full mx-auto h-full'>
               <Navbar />
-              <Toaster richColors />
               <main className='flex flex-col pt-20 pb-20 w-full h-full'>
                 {children}
-                <Analytics />
               </main>
+              <Toaster richColors />
             </div>
+            <Analytics />
             <SpeedInsights />
           </ThemeProvider>
         </Providers>
