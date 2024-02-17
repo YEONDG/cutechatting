@@ -7,8 +7,11 @@ import { navLinks } from './nav-list';
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { SignOutButton } from './sign-out-button';
+import { useSession } from 'next-auth/react';
 
 export const MobileNav = () => {
+  const session = useSession();
   const [open, setOpen] = React.useState(false);
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -24,6 +27,13 @@ export const MobileNav = () => {
               {link.name}
             </MobileLink>
           ))}
+          {session?.status === 'authenticated' ? (
+            <SignOutButton />
+          ) : (
+            <MobileLink href='/sign-in' onOpenChange={setOpen}>
+              로그인
+            </MobileLink>
+          )}
         </div>
       </SheetContent>
     </Sheet>
