@@ -18,6 +18,7 @@ export const MobileNav = () => {
       <SheetTrigger asChild>
         <div className='flex sm:hidden hover:cursor-pointer p-2'>
           <Menu />
+          <span className='sr-only'>메뉴</span>
         </div>
       </SheetTrigger>
       <SheetContent side='right' className='pl-0'>
