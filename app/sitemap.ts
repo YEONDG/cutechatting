@@ -1,120 +1,47 @@
+import { db } from '@/lib/db';
+import { absoluteUrl } from '@/lib/utils';
 import { MetadataRoute } from 'next';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: 'https://cutechatting.com',
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 1,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://www.cutechatting.com/chzzk',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://www.cutechatting.com/afreeca',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://www.cutechatting.com/sign-in',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch/tags',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch/contribute',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch/all',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch?page=0',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch?page=1',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch?page=2',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch?page=3',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/sign-up',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch/all?page=0',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch/all?page=1',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch/all?page=2',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch/all?page=3',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch?page=4',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-    {
-      url: 'https://www.cutechatting.com/twitch/all?page=4',
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.5,
-    },
-  ];
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const twitchApprovedPageCount = Math.ceil(
+    (await db.twitchPost.count({
+      where: {
+        approved: true,
+      },
+    })) / 6
+  );
+  const twitchPageCount = Math.ceil((await db.twitchPost.count()) / 6);
+
+  const twitchApprovedRoutes = Array.from(
+    { length: twitchApprovedPageCount },
+    (_, index) => index + 1
+  ).map((page) => ({
+    url: absoluteUrl(`/twitch?page=${page}`),
+    lastModified: new Date().toISOString(),
+  }));
+
+  const twitchRoutes = Array.from(
+    { length: twitchPageCount },
+    (_, index) => index + 1
+  ).map((page) => ({
+    url: absoluteUrl(`/twitch/all?page=${page}`),
+    lastModified: new Date().toISOString(),
+  }));
+
+  const routes = [
+    '',
+    '/twitch',
+    '/twitch/tags',
+    '/twitch/contribute',
+    '/twitch/all',
+    '/chzzk',
+    '/afreeca',
+    '/dashboard',
+    '/sign-in',
+  ].map((route) => ({
+    url: absoluteUrl(route),
+    lastModified: new Date().toISOString(),
+    priority: 1,
+  }));
+  return [...routes, ...twitchRoutes, ...twitchApprovedRoutes];
 }
