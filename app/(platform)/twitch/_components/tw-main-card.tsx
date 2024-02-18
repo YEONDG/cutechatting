@@ -52,7 +52,7 @@ export const TwMainCard = ({
   const IsAdmin = role === 'ADMIN';
 
   return (
-    <section className='relative flex flex-col justify-between border max-w-[280px] sm:max-w-[350px] mx-auto border-black text-xxs sm:text-xs dark:border-white'>
+    <section className='relative mx-auto flex max-w-[280px] flex-col justify-between border border-black text-xxs sm:max-w-[350px] sm:text-xs dark:border-white'>
       <CardHeader
         id={id}
         title={title}
@@ -60,7 +60,7 @@ export const TwMainCard = ({
         createdDate={createdDate}
         approved={approved}
       />
-      <div className='absolute top-2 right-2'>
+      <div className='absolute right-2 top-2'>
         <LikeButton
           isLiked={isLiked}
           likeCount={likeCount}
@@ -71,17 +71,17 @@ export const TwMainCard = ({
       <CardContent content={content} />
       <TagDisplay tags={tags} />
       <Separator />
-      <div className='flex justify-between items-center mx-2 my-2 gap-2'>
+      <div className='mx-2 my-2 flex items-center justify-between gap-2'>
         <div className='flex'>
           <CopyToClipboard text={content ?? ''} onCopy={onCopySuccess}>
-            <Button variant='default' className='w-24 h-8'>
+            <Button variant='default' className='h-8 w-24'>
               <ClipboardCopy />
               Copy
             </Button>
           </CopyToClipboard>
           {copy && (
             <p className='flex text-xl'>
-              <Check className='text-green-500 w-8 h-8' />
+              <Check className='h-8 w-8 text-green-500' />
               복사완료
             </p>
           )}

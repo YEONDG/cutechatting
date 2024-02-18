@@ -13,7 +13,7 @@ export const navLinks = [
 const NavList = () => {
   const pathname = usePathname();
   return (
-    <ul className='flex gap-2 justify-center items-center text-xl'>
+    <ul className='flex items-center justify-center gap-2 text-xl'>
       {navLinks.map((link) => {
         const isActive = pathname.startsWith(link.href);
         return (

@@ -5,7 +5,7 @@ import { AuthNav } from './auth-nav';
 
 export const MainNav = () => {
   return (
-    <div className='hidden sm:flex gap-2 items-center text-xl'>
+    <div className='hidden items-center gap-2 text-xl sm:flex'>
       <ModeToggle />
       <NavList />
       <AuthNav />

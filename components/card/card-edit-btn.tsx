@@ -88,7 +88,7 @@ export const CardEditBtn = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Edit className='w-6 h-6 hover:scale-125 cursor-pointer' />
+        <Edit className='h-6 w-6 cursor-pointer hover:scale-125' />
       </DialogTrigger>
       <DialogContent className='sm:max-w-3xl'>
         <DialogHeader>
@@ -168,7 +168,7 @@ export const CardEditBtn = ({
                 <Button
                   type='button'
                   onClick={() => append({ tag: '' })}
-                  className='flex gap-2 mt-4'
+                  className='mt-4 flex gap-2'
                 >
                   태그 추가
                   <Plus />

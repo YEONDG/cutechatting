@@ -6,7 +6,7 @@ interface CardContentProps {
 
 export const CardContent = ({ content }: CardContentProps) => {
   return (
-    <p className='flex items-center h-full text-xxs sm:text-xs text-center overflow-hidden max-w-sm '>
+    <p className='flex h-full max-w-sm items-center overflow-hidden text-center text-xxs sm:text-xs '>
       {content}
     </p>
   );

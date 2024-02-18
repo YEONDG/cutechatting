@@ -34,7 +34,7 @@ export const CardDeleteBtn = ({ postId }: CardDeleteBtn) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <TrashIcon className='hover:cursor-pointer hover:scale-125' />
+        <TrashIcon className='hover:scale-125 hover:cursor-pointer' />
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

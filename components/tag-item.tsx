@@ -23,7 +23,7 @@ export const TagItem = ({ id, name, count, size }: TagItemProps) => {
       onClick={handleClick}
       className='cursor-pointer'
     >
-      <Tags className='h-6 w-6 mr-2' />
+      <Tags className='mr-2 h-6 w-6' />
       {name}
       {'  '}
       {count && <span className='ml-2'>{count}개</span>}

@@ -9,7 +9,7 @@ const TwitchAllPage = async ({
 }) => {
   const page = searchParams['page'] ?? '1';
   return (
-    <div className='flex flex-col justify-center items-center gap-5 mx-auto'>
+    <div className='mx-auto flex flex-col items-center justify-center gap-5'>
       <TwAllHeader />
       <TwAllMain page={page} />
     </div>

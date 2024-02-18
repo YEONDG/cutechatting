@@ -9,11 +9,11 @@ import {
 } from '@/components/ui/tooltip';
 export const TwChatHeader = () => {
   return (
-    <div className='h-[50px] flex justify-between items-center px-2.5  border-y border-black '>
+    <div className='flex h-[50px] items-center justify-between border-y  border-black px-2.5 '>
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className='flex items-center justify-center hover:bg-slate-200 rounded-md h-[30px] w-[30px]'>
+            <div className='flex h-[30px] w-[30px] items-center justify-center rounded-md hover:bg-slate-200'>
               <ArrowRightFromLine className='h-[15px] w-[15px]' />
             </div>
           </TooltipTrigger>
@@ -26,7 +26,7 @@ export const TwChatHeader = () => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className='flex items-center justify-center hover:bg-slate-200 rounded-md h-[30px] w-[30px]'>
+            <div className='flex h-[30px] w-[30px] items-center justify-center rounded-md hover:bg-slate-200'>
               <Users className='h-[15px] w-[15px]' />
             </div>
           </TooltipTrigger>

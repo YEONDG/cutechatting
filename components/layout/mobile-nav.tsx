@@ -16,13 +16,13 @@ export const MobileNav = () => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <div className='flex sm:hidden hover:cursor-pointer p-2'>
+        <div className='flex p-2 hover:cursor-pointer sm:hidden'>
           <Menu />
           <span className='sr-only'>메뉴</span>
         </div>
       </SheetTrigger>
       <SheetContent side='right' className='pl-0'>
-        <div className='flex flex-col justify-center items-end h-full text-5xl gap-10 mr-5'>
+        <div className='mr-5 flex h-full flex-col items-end justify-center gap-10 text-5xl'>
           {navLinks.map((link) => (
             <MobileLink key={link.href} href={link.href} onOpenChange={setOpen}>
               {link.name}

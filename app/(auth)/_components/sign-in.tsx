@@ -14,7 +14,7 @@ const SignIn = () => {
           회원가입하시겠습니까?{' '}
           <Link
             href='/sign-up'
-            className='hover:text-zinc-800 text-sm underline underline-offset-4'
+            className='text-sm underline underline-offset-4 hover:text-zinc-800'
           >
             Sign up
           </Link>

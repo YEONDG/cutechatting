@@ -12,7 +12,7 @@ const TwitchPage = async ({
   const popular = searchParams['popular'] === 'true';
 
   return (
-    <div className='flex flex-col justify-center items-center gap-4'>
+    <div className='flex flex-col items-center justify-center gap-4'>
       <TwHeader />
       <TwMain page={page} popular={popular} />
     </div>

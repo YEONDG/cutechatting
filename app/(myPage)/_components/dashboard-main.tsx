@@ -33,7 +33,7 @@ export const DashboardMain = async ({ userId }: DashboardMainProps) => {
 
 DashboardMain.Skeleton = function DashboardMainSkeleton() {
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 w-full h-full gap-4 md:gap-20'>
+    <div className='grid h-full w-full grid-cols-1 gap-4 md:grid-cols-2 md:gap-20'>
       <Skeleton className='aspect-video h-[506px] w-[350px]' />
       <Skeleton className='aspect-video h-[506px] w-[350px]' />
       <Skeleton className='aspect-video h-[506px] w-[350px]' />

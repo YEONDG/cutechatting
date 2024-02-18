@@ -5,10 +5,10 @@ interface TwChatItemProps {
 
 export const TwChatItem = ({ message }: TwChatItemProps) => {
   return (
-    <div className='flex flex-col justify-start w-[320px] mx-auto  hover:bg-slate-700/40 rounded-md '>
+    <div className='mx-auto flex w-[320px] flex-col justify-start  rounded-md hover:bg-slate-700/40 '>
       <div className='flex px-2.5'>
-        <p className='text-xs leading-5 w-full font-medium'>
-          <p className='rounded-sm font-bold hover:bg-slate-200 cursor-pointer'>
+        <p className='w-full text-xs font-medium leading-5'>
+          <p className='cursor-pointer rounded-sm font-bold hover:bg-slate-200'>
             트위치1 <span className='font-normal'>(asdf1234):</span>
           </p>
           {message}

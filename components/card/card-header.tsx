@@ -19,13 +19,13 @@ export const CardHeader = ({
 }: CardHeaderProps) => {
   return (
     <header className='h-20'>
-      <div className='flex items-center mx-4 mt-2 gap-2'>
+      <div className='mx-4 mt-2 flex items-center gap-2'>
         <BadgeCheck
           className={cn(`hidden`, { 'block text-green-500': approved })}
         />
         <h2 className='text-2xl font-bold'>{title}</h2>
       </div>
-      <div className='flex justify-between mx-4 my-1 text-sm '>
+      <div className='mx-4 my-1 flex justify-between text-sm '>
         <div className='text-slate-500'>
           {createdDate} / {username}
         </div>

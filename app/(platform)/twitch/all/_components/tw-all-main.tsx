@@ -18,7 +18,7 @@ export const TwAllMain = async ({ page }: TwAllMainProps) => {
   const [totalPostsCount, posts] = await Promise.all([postsCount, postsData]);
   return (
     <div className='flex flex-col justify-center'>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 lg:px-0 h-full gap-4'>
+      <div className='grid h-full w-full grid-cols-1 gap-4 px-5 md:grid-cols-2 lg:grid-cols-3 lg:px-0'>
         {posts?.map((post) => (
           <TwMainCard
             key={post.id}
@@ -45,7 +45,7 @@ export const TwAllMain = async ({ page }: TwAllMainProps) => {
 
 TwAllMain.Skeleton = function TwMainSkeleton() {
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full px-5 lg:px-0 h-full gap-4'>
+    <div className='grid h-full w-full grid-cols-1 gap-4 px-5 md:grid-cols-2 lg:grid-cols-3 lg:px-0'>
       <Skeleton className='aspect-video h-[506px] w-[350px]' />
       <Skeleton className='aspect-video h-[506px] w-[350px]' />
       <Skeleton className='aspect-video h-[506px] w-[350px]' />

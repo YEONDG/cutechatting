@@ -98,7 +98,7 @@ export const TwForm = ({ userId }: TwFormProps) => {
               <FormControl>
                 <Textarea
                   placeholder='내용'
-                  className='min-h-96 max-w-2xl text-xs bg-slate-300 dark:bg-slate-700'
+                  className='min-h-96 max-w-2xl bg-slate-300 text-xs dark:bg-slate-700'
                   {...field}
                 />
               </FormControl>
@@ -143,7 +143,7 @@ export const TwForm = ({ userId }: TwFormProps) => {
           <Button
             type='button'
             onClick={() => append({ tag: '' })}
-            className='flex gap-2 mt-4'
+            className='mt-4 flex gap-2'
           >
             태그 추가
             <Plus />

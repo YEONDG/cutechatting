@@ -8,7 +8,7 @@ interface TagDisplayProps {
 
 export const TagDisplay = ({ tags = [] }: TagDisplayProps) => {
   return (
-    <div className='flex m-2'>
+    <div className='m-2 flex'>
       {tags.map((tag) => (
         <TagItem key={tag.id} id={tag.id} name={tag.name} />
       ))}

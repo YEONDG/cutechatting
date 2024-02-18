@@ -70,9 +70,9 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className='flex flex-col justify-center sm:items-center w-full mx-auto h-full'>
+            <div className='mx-auto flex h-full w-full flex-col justify-center sm:items-center'>
               <Navbar />
-              <main className='flex flex-col pt-20 pb-20 w-full h-full'>
+              <main className='flex h-full w-full flex-col pb-20 pt-20'>
                 {children}
               </main>
               <Toaster richColors />
