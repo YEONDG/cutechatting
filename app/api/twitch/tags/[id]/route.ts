@@ -1,5 +1,6 @@
-import { db } from '@/lib/db';
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server"
+
+import { db } from "@/lib/db"
 
 export async function GET(
   req: Request,
@@ -7,7 +8,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const tagId = Number(params.id);
+    const tagId = Number(params.id)
 
     const twitchTag = await db.twitchPost.findMany({
       where: {
@@ -26,11 +27,11 @@ export async function GET(
           },
         },
       },
-    });
+    })
 
-    return NextResponse.json(twitchTag);
+    return NextResponse.json(twitchTag)
   } catch (error) {
-    console.log('[Twitch_Tags_GET]', error);
-    return new NextResponse('Internal Error', { status: 500 });
+    console.log("[Twitch_Tags_GET]", error)
+    return new NextResponse("Internal Error", { status: 500 })
   }
 }

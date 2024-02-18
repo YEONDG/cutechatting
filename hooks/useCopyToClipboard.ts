@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState } from "react"
 
 export const useCopyToClipboard = () => {
-  const [copy, setCopy] = useState(false);
+  const [copy, setCopy] = useState(false)
 
   const onCopySuccess = () => {
-    setCopy(true);
+    setCopy(true)
     setTimeout(() => {
-      setCopy(false);
-    }, 1000);
-  };
+      setCopy(false)
+    }, 1000)
+  }
 
-  return { copy, onCopySuccess };
-};
+  return { copy, onCopySuccess }
+}

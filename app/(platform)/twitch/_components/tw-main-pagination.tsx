@@ -1,8 +1,8 @@
-'use client';
+"use client"
 
-import { redirect, useSearchParams } from 'next/navigation';
+import { redirect, useSearchParams } from "next/navigation"
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button"
 import {
   Pagination,
   PaginationContent,
@@ -11,39 +11,39 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
+} from "@/components/ui/pagination"
 
 interface TwMainPagenationProps {
-  postsCount: number;
-  url?: string;
+  postsCount: number
+  url?: string
 }
 
 export const TwMainPagenation = ({
   postsCount,
-  url = '/twitch',
+  url = "/twitch",
 }: TwMainPagenationProps) => {
-  const searchParams = useSearchParams();
-  const isPopular = searchParams.get('popular') ? true : false;
-  const page = searchParams.get('page') ?? '1';
-  const pageNumber = Number(page);
-  const totalPage = Math.ceil(postsCount / 6);
+  const searchParams = useSearchParams()
+  const isPopular = searchParams.get("popular") ? true : false
+  const page = searchParams.get("page") ?? "1"
+  const pageNumber = Number(page)
+  const totalPage = Math.ceil(postsCount / 6)
 
-  const startIdx = (pageNumber - 1) * 6;
-  const endIdx = startIdx + 6;
+  const startIdx = (pageNumber - 1) * 6
+  const endIdx = startIdx + 6
 
-  const hasNextPage = endIdx < postsCount;
-  const hasPrevPage = startIdx > 0;
+  const hasNextPage = endIdx < postsCount
+  const hasPrevPage = startIdx > 0
 
-  if (pageNumber > totalPage) redirect(`${url}?page=${totalPage}`);
+  if (pageNumber > totalPage) redirect(`${url}?page=${totalPage}`)
 
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <Button variant='ghost' disabled={!hasPrevPage}>
+          <Button variant="ghost" disabled={!hasPrevPage}>
             <PaginationPrevious
               href={`${url}?page=${pageNumber - 1}${
-                isPopular ? '&popular=true' : ''
+                isPopular ? "&popular=true" : ""
               }`}
             />
           </Button>
@@ -56,36 +56,36 @@ export const TwMainPagenation = ({
         />
 
         <PaginationItem>
-          <Button variant='ghost' disabled={!hasNextPage}>
+          <Button variant="ghost" disabled={!hasNextPage}>
             <PaginationNext
               href={`${url}?page=${pageNumber + 1}${
-                isPopular ? '&popular=true' : ''
+                isPopular ? "&popular=true" : ""
               }`}
             />
           </Button>
         </PaginationItem>
       </PaginationContent>
     </Pagination>
-  );
-};
+  )
+}
 const PageNumber = ({
   page,
   isActive,
   isPopular,
   url,
 }: {
-  page: number;
-  isActive: boolean;
-  isPopular: boolean;
-  url: string;
+  page: number
+  isActive: boolean
+  isPopular: boolean
+  url: string
 }) => (
   <PaginationLink
-    href={`${url}?page=${page}${isPopular ? '&popular=true' : ''}`}
+    href={`${url}?page=${page}${isPopular ? "&popular=true" : ""}`}
     isActive={isActive}
   >
     {page}
   </PaginationLink>
-);
+)
 
 const PageNumbers = ({
   totalPage,
@@ -93,19 +93,19 @@ const PageNumbers = ({
   isPopular,
   url,
 }: {
-  totalPage: number;
-  currentPage: number;
-  isPopular: boolean;
-  url: string;
+  totalPage: number
+  currentPage: number
+  isPopular: boolean
+  url: string
 }) => {
-  const pages = [];
+  const pages = []
 
-  const startPage = Math.max(2, currentPage - 1);
-  const endPage = Math.min(totalPage - 1, currentPage + 1);
+  const startPage = Math.max(2, currentPage - 1)
+  const endPage = Math.min(totalPage - 1, currentPage + 1)
 
-  const firstDots = startPage > 2 ? <PaginationEllipsis key='dots' /> : null;
+  const firstDots = startPage > 2 ? <PaginationEllipsis key="dots" /> : null
   const lastDots =
-    endPage < totalPage - 1 ? <PaginationEllipsis key='dots2' /> : null;
+    endPage < totalPage - 1 ? <PaginationEllipsis key="dots2" /> : null
 
   const firstPage = (
     <PageNumber
@@ -115,7 +115,7 @@ const PageNumbers = ({
       isPopular={isPopular}
       url={url}
     />
-  );
+  )
   const lastPage =
     totalPage === 1 ? null : (
       <PageNumber
@@ -125,7 +125,7 @@ const PageNumbers = ({
         isPopular={isPopular}
         url={url}
       />
-    );
+    )
   for (let i = startPage; i <= endPage; i++) {
     pages.push(
       <PageNumber
@@ -135,8 +135,8 @@ const PageNumbers = ({
         isPopular={isPopular}
         url={url}
       />
-    );
+    )
   }
 
-  return [firstPage, firstDots, ...pages, lastDots, lastPage];
-};
+  return [firstPage, firstDots, ...pages, lastDots, lastPage]
+}

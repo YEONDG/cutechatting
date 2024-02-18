@@ -1,26 +1,28 @@
-import { TwMainPagenation } from './tw-main-pagination';
-import { TwMainCard } from './tw-main-card';
-import { getAuthSession } from '@/lib/auth';
-import { getTotalPostsCount, getTwitchPosts } from '@/apis/twitch/post';
+import { getTotalPostsCount, getTwitchPosts } from "@/apis/twitch/post"
+
+import { getAuthSession } from "@/lib/auth"
+
+import { TwMainCard } from "./tw-main-card"
+import { TwMainPagenation } from "./tw-main-pagination"
 
 interface TwMainProps {
-  page: string;
-  popular: boolean;
+  page: string
+  popular: boolean
 }
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic"
 export const TwMain = async ({ page, popular }: TwMainProps) => {
-  const session = await getAuthSession();
-  const userId = session?.user.id;
+  const session = await getAuthSession()
+  const userId = session?.user.id
 
-  const postsCount = getTotalPostsCount();
-  const postsData = getTwitchPosts(page, popular);
+  const postsCount = getTotalPostsCount()
+  const postsData = getTwitchPosts(page, popular)
 
-  const [totalPostsCount, posts] = await Promise.all([postsCount, postsData]);
+  const [totalPostsCount, posts] = await Promise.all([postsCount, postsData])
 
   return (
-    <div className='flex w-full flex-col items-center justify-center'>
-      <div className='grid h-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 lg:px-0'>
+    <div className="flex w-full flex-col items-center justify-center">
+      <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 lg:px-0">
         {posts?.map((post) => (
           <TwMainCard
             key={post.id}
@@ -38,9 +40,9 @@ export const TwMain = async ({ page, popular }: TwMainProps) => {
           />
         ))}
       </div>
-      <div className='py-8'>
-        <TwMainPagenation postsCount={totalPostsCount} url={'/twitch'} />
+      <div className="py-8">
+        <TwMainPagenation postsCount={totalPostsCount} url={"/twitch"} />
       </div>
     </div>
-  );
-};
+  )
+}

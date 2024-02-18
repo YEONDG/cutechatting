@@ -1,18 +1,18 @@
-import { getLikePosts } from '@/apis/dashboard/dashboard';
-import { TwMainCard } from '@/app/(platform)/twitch/_components/tw-main-card';
-import { Skeleton } from '@/components/ui/skeleton';
-import { TwitchPostWithLikesWithTags } from '@/types/types';
+import { getLikePosts } from "@/apis/dashboard/dashboard"
+import { TwMainCard } from "@/app/(platform)/twitch/_components/tw-main-card"
+import { Skeleton } from "@/components/ui/skeleton"
+import { TwitchPostWithLikesWithTags } from "@/types/types"
 
 interface DashboardMainProps {
-  userId: string;
-  page: string;
+  userId: string
+  page: string
 }
 
 export const DashboardMain = async ({ userId }: DashboardMainProps) => {
-  const posts: TwitchPostWithLikesWithTags[] = await getLikePosts(userId);
+  const posts: TwitchPostWithLikesWithTags[] = await getLikePosts(userId)
 
   return (
-    <div className='flex flex-wrap gap-4'>
+    <div className="flex flex-wrap gap-4">
       {posts?.map((post) => (
         <TwMainCard
           key={post.id}
@@ -28,18 +28,18 @@ export const DashboardMain = async ({ userId }: DashboardMainProps) => {
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
 DashboardMain.Skeleton = function DashboardMainSkeleton() {
   return (
-    <div className='grid h-full w-full grid-cols-1 gap-4 md:grid-cols-2 md:gap-20'>
-      <Skeleton className='aspect-video h-[506px] w-[350px]' />
-      <Skeleton className='aspect-video h-[506px] w-[350px]' />
-      <Skeleton className='aspect-video h-[506px] w-[350px]' />
-      <Skeleton className='aspect-video h-[506px] w-[350px]' />
-      <Skeleton className='aspect-video h-[506px] w-[350px]' />
-      <Skeleton className='aspect-video h-[506px] w-[350px]' />
+    <div className="grid h-full w-full grid-cols-1 gap-4 md:grid-cols-2 md:gap-20">
+      <Skeleton className="aspect-video h-[506px] w-[350px]" />
+      <Skeleton className="aspect-video h-[506px] w-[350px]" />
+      <Skeleton className="aspect-video h-[506px] w-[350px]" />
+      <Skeleton className="aspect-video h-[506px] w-[350px]" />
+      <Skeleton className="aspect-video h-[506px] w-[350px]" />
+      <Skeleton className="aspect-video h-[506px] w-[350px]" />
     </div>
-  );
-};
+  )
+}

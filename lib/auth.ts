@@ -1,11 +1,12 @@
-import { nanoid } from 'nanoid';
-import { NextAuthOptions, getServerSession } from 'next-auth';
-import KakaoProvider from 'next-auth/providers/kakao';
-import NaverProvider from 'next-auth/providers/naver';
-import GoogleProvider from 'next-auth/providers/google';
-import { db } from './db';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { Adapter } from 'next-auth/adapters';
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { nanoid } from "nanoid"
+import { getServerSession, NextAuthOptions } from "next-auth"
+import { Adapter } from "next-auth/adapters"
+import GoogleProvider from "next-auth/providers/google"
+import KakaoProvider from "next-auth/providers/kakao"
+import NaverProvider from "next-auth/providers/naver"
+
+import { db } from "./db"
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db) as Adapter,
@@ -25,7 +26,7 @@ export const authOptions: NextAuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -33,11 +34,11 @@ export const authOptions: NextAuthOptions = {
         where: {
           email: token.email,
         },
-      });
+      })
 
       if (!dbUser) {
-        token.id = user!.id;
-        return token;
+        token.id = user!.id
+        return token
       }
 
       if (!dbUser.username) {
@@ -46,9 +47,9 @@ export const authOptions: NextAuthOptions = {
             id: dbUser.id,
           },
           data: {
-            username: '손님' + nanoid(10),
+            username: "손님" + nanoid(10),
           },
-        });
+        })
       }
 
       return {
@@ -58,23 +59,23 @@ export const authOptions: NextAuthOptions = {
         picture: dbUser.image,
         username: dbUser.username,
         role: dbUser.role,
-      };
+      }
     },
     async session({ token, session }) {
       if (token) {
-        session.user.id = token.id;
-        session.user.name = token.name;
-        session.user.email = token.email;
-        session.user.image = token.picture;
-        session.user.username = token.username;
-        session.user.role = token.role;
+        session.user.id = token.id
+        session.user.name = token.name
+        session.user.email = token.email
+        session.user.image = token.picture
+        session.user.username = token.username
+        session.user.role = token.role
       }
-      return session;
+      return session
     },
     redirect() {
-      return '/';
+      return "/"
     },
   },
-};
+}
 
-export const getAuthSession = () => getServerSession(authOptions);
+export const getAuthSession = () => getServerSession(authOptions)

@@ -1,21 +1,21 @@
-import { getAuthSession } from '@/lib/auth';
-import { db } from '@/lib/db';
+import { getAuthSession } from "@/lib/auth"
+import { db } from "@/lib/db"
 
 export async function PATCH(
   req: Request,
   { params }: { params: { postId: string } }
 ) {
   try {
-    const postId = Number(params.postId);
+    const postId = Number(params.postId)
 
     if (isNaN(postId)) {
-      return new Response('Invalid post ID', { status: 400 });
+      return new Response("Invalid post ID", { status: 400 })
     }
 
-    const session = await getAuthSession();
+    const session = await getAuthSession()
 
     if (!session?.user) {
-      return new Response('Unauthorized', { status: 401 });
+      return new Response("Unauthorized", { status: 401 })
     }
 
     const existingLike = await db.like.findFirst({
@@ -23,7 +23,7 @@ export async function PATCH(
         userId: session?.user.id,
         postId: postId,
       },
-    });
+    })
 
     const post = await db.twitchPost.findUnique({
       where: {
@@ -33,10 +33,10 @@ export async function PATCH(
         author: true,
         likes: true,
       },
-    });
+    })
 
     if (!post) {
-      return new Response('Post not found', { status: 404 });
+      return new Response("Post not found", { status: 404 })
     }
 
     if (existingLike) {
@@ -44,17 +44,17 @@ export async function PATCH(
         where: {
           id: existingLike.id,
         },
-      });
+      })
 
       const likeCount = await db.like.findMany({
         where: {
           postId: postId,
         },
-      });
+      })
 
       return new Response(JSON.stringify({ isLiked: false, likeCount }), {
         status: 200,
-      });
+      })
     }
 
     await db.like.create({
@@ -62,18 +62,18 @@ export async function PATCH(
         userId: session?.user.id,
         postId: postId,
       },
-    });
+    })
 
     const likeCount = await db.like.findMany({
       where: {
         postId: postId,
       },
-    });
+    })
     return new Response(JSON.stringify({ isLiked: true, likeCount }), {
       status: 200,
-    });
+    })
   } catch (error) {
-    console.log(error);
-    return new Response('Internal Error', { status: 500 });
+    console.log(error)
+    return new Response("Internal Error", { status: 500 })
   }
 }

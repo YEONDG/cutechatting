@@ -1,6 +1,7 @@
-import { db } from '@/lib/db';
-import { absoluteUrl } from '@/lib/utils';
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from "next"
+
+import { db } from "@/lib/db"
+import { absoluteUrl } from "@/lib/utils"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const twitchApprovedPageCount = Math.ceil(
@@ -9,8 +10,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         approved: true,
       },
     })) / 6
-  );
-  const twitchPageCount = Math.ceil((await db.twitchPost.count()) / 6);
+  )
+  const twitchPageCount = Math.ceil((await db.twitchPost.count()) / 6)
 
   const twitchApprovedRoutes = Array.from(
     { length: twitchApprovedPageCount },
@@ -18,7 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ).map((page) => ({
     url: absoluteUrl(`/twitch?page=${page}`),
     lastModified: new Date().toISOString(),
-  }));
+  }))
 
   const twitchRoutes = Array.from(
     { length: twitchPageCount },
@@ -26,22 +27,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ).map((page) => ({
     url: absoluteUrl(`/twitch/all?page=${page}`),
     lastModified: new Date().toISOString(),
-  }));
+  }))
 
   const routes = [
-    '',
-    '/twitch',
-    '/twitch/tags',
-    '/twitch/contribute',
-    '/twitch/all',
-    '/chzzk',
-    '/afreeca',
-    '/dashboard',
-    '/sign-in',
+    "",
+    "/twitch",
+    "/twitch/tags",
+    "/twitch/contribute",
+    "/twitch/all",
+    "/chzzk",
+    "/afreeca",
+    "/dashboard",
+    "/sign-in",
   ].map((route) => ({
     url: absoluteUrl(route),
     lastModified: new Date().toISOString(),
     priority: 1,
-  }));
-  return [...routes, ...twitchRoutes, ...twitchApprovedRoutes];
+  }))
+  return [...routes, ...twitchRoutes, ...twitchApprovedRoutes]
 }

@@ -1,4 +1,8 @@
-import { deleteTwitchPost } from '@/apis/twitch/post';
+import { useRouter } from "next/navigation"
+import { deleteTwitchPost } from "@/apis/twitch/post"
+import { TrashIcon } from "lucide-react"
+import { toast } from "sonner"
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -8,33 +12,30 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { TrashIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+} from "@/components/ui/alert-dialog"
 
 interface CardDeleteBtn {
-  postId: number;
+  postId: number
 }
 
 export const CardDeleteBtn = ({ postId }: CardDeleteBtn) => {
-  const router = useRouter();
+  const router = useRouter()
 
   const handleDelete = async (postId: number) => {
     try {
-      const response = await deleteTwitchPost(postId);
-      toast.success(response);
-      router.refresh();
+      const response = await deleteTwitchPost(postId)
+      toast.success(response)
+      router.refresh()
     } catch (err) {
       if (err instanceof Error) {
-        toast.error('게시글 작성 실패 ' + err.message);
+        toast.error("게시글 작성 실패 " + err.message)
       }
     }
-  };
+  }
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <TrashIcon className='hover:scale-125 hover:cursor-pointer' />
+        <TrashIcon className="hover:scale-125 hover:cursor-pointer" />
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -48,5 +49,5 @@ export const CardDeleteBtn = ({ postId }: CardDeleteBtn) => {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  );
-};
+  )
+}
