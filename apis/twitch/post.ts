@@ -1,6 +1,7 @@
-import { BASE_URL } from ".."
-import { SubmissionRequest } from "@/lib/validators/submission"
 import { TwitchPostWithLikesWithTags } from "@/types/types"
+import { SubmissionRequest } from "@/lib/validators/submission"
+
+import { BASE_URL } from ".."
 
 export const getTwitchPosts = async (
   page: string,

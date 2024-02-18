@@ -1,9 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { TwChatBottom } from "./tw-chat-bottom"
-import { TwChatHeader } from "./tw-chat-header"
-import { TwChatItems } from "./tw-chat-items"
+
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -12,6 +10,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+
+import { TwChatBottom } from "./tw-chat-bottom"
+import { TwChatHeader } from "./tw-chat-header"
+import { TwChatItems } from "./tw-chat-items"
 
 interface ChatItem {
   id: number

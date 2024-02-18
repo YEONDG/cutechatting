@@ -2,6 +2,12 @@
 
 import { useRouter } from "next/navigation"
 import { updateUsername } from "@/apis/dashboard/dashboard"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { User } from "@prisma/client"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+
+import { UsernameRequest, UsernameValidator } from "@/lib/validators/username"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -13,11 +19,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { UsernameRequest, UsernameValidator } from "@/lib/validators/username"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { User } from "@prisma/client"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
 
 interface ProfileFormProps {
   user: Pick<User, "id"> & { username: string | null }

@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation"
-import { ProfileForm } from "../../_components/profile-form"
-import { Separator } from "@/components/ui/separator"
+
 import { getAuthSession } from "@/lib/auth"
+import { Separator } from "@/components/ui/separator"
+
+import { ProfileForm } from "../../_components/profile-form"
 
 const AccountPage = async () => {
   const session = await getAuthSession()

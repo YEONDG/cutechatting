@@ -1,5 +1,6 @@
-import { BASE_URL } from ".."
 import { UsernameRequest } from "@/lib/validators/username"
+
+import { BASE_URL } from ".."
 
 export const updateUsername = async (values: UsernameRequest) => {
   const response = await fetch("/api/dashboard/profile", {

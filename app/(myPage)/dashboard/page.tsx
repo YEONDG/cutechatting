@@ -1,7 +1,9 @@
 import { Suspense } from "react"
 import { redirect } from "next/navigation"
-import { DashboardMain } from "../_components/dashboard-main"
+
 import { getAuthSession } from "@/lib/auth"
+
+import { DashboardMain } from "../_components/dashboard-main"
 
 const DashboardPage = async ({
   searchParams,
