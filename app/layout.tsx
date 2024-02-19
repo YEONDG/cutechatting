@@ -45,6 +45,11 @@ export const metadata: Metadata = {
       },
     ],
   },
+  verification: {
+    other: {
+      "naver-site-verification": "ba31328bd1cba4357674b237f4f68e86454c549a",
+    },
+  },
 }
 
 export const viewport: Viewport = {
