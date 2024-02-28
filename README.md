@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 큐트채팅
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Introduce
+인터넷 방송 플랫폼에서 사용하는 간단한 텍스트이모티콘 사이트입니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🛠사용된 스택
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+TypeScript, Nextjs, Tailwind, Next-auth, React-hook-form, zod, shadcn-ui
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Prisma, supabase DB, Vercel
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 주요기능 및 페이지 소개
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+|메인화면|로그인구현|
+|---|---|
+|<img src ='https://github.com/YEONDG/ganda/assets/100520319/4d3d21cd-decd-40ef-957a-982d09b0039d' width='500' height='300' />|<img src ='https://github.com/YEONDG/ganda/assets/100520319/e82d1638-e293-4519-9f97-c190c48cb9d8' width='500' height='300' />|
+||카카오, 구글, 네이버 로그인 구현|
+
+|트위치 메인| 글작성|
+|---|---|
+|<img src ='https://github.com/YEONDG/ganda/assets/100520319/25d135c0-48ee-4f96-9d1d-3a08759d73e5.gif' width='478' height='300' />|<img src ='https://github.com/YEONDG/ganda/assets/100520319/07b1522c-7511-4f33-bc74-a32c0521c88a.gif' width='478' height='300' />|
+|트위치 메인페이지 페이지네이션| 유효성 검사 |
+
+|좋아요||
+|---|---|
+|<img src ='https://github.com/YEONDG/ganda/assets/100520319/362ee389-fd28-4f90-a840-0412e0952e49.gif' width='450' height='300' />||
