@@ -98,7 +98,7 @@ export const TwForm = ({ userId }: TwFormProps) => {
               <FormControl>
                 <Textarea
                   placeholder="내용"
-                  className="min-h-96 max-w-2xl bg-slate-300 text-xs dark:bg-slate-700"
+                  className="min-h-96 max-w-2xl whitespace-pre bg-slate-300 text-xs dark:bg-slate-700"
                   {...field}
                 />
               </FormControl>
@@ -106,7 +106,7 @@ export const TwForm = ({ userId }: TwFormProps) => {
             </FormItem>
           )}
         />
-        <div>
+        <div className="">
           {fields.map((field, index) => (
             <FormField
               key={field.id}
@@ -143,7 +143,7 @@ export const TwForm = ({ userId }: TwFormProps) => {
           <Button
             type="button"
             onClick={() => append({ tag: "" })}
-            className="mt-4 flex gap-2"
+            className="mt-2 flex gap-2"
           >
             태그 추가
             <Plus />
