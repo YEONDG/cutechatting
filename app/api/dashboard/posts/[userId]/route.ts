@@ -21,11 +21,6 @@ export async function GET(
       },
       orderBy: [
         {
-          likes: {
-            _count: "desc",
-          },
-        },
-        {
           id: "desc",
         },
       ],
