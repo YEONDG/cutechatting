@@ -92,13 +92,16 @@ export const CardEditBtn = ({
       <DialogTrigger asChild>
         <Edit className="h-6 w-6 cursor-pointer hover:scale-125" />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-3xl">
+      <DialogContent className="mx-auto w-screen max-w-full px-4 sm:max-w-3xl">
         <DialogHeader>
           <DialogTitle>수정하기</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="flex flex-col gap-4 py-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-2 sm:space-y-8"
+          >
+            <div className="flex flex-col sm:gap-4 sm:py-4">
               <FormField
                 control={form.control}
                 name="title"
@@ -126,7 +129,7 @@ export const CardEditBtn = ({
                       <Textarea
                         placeholder="내용"
                         {...field}
-                        className="min-h-96 bg-slate-300 dark:bg-slate-700 "
+                        className="min-h-48 bg-slate-300 sm:min-h-60 sm:text-xs dark:bg-slate-700"
                       />
                     </FormControl>
                     <FormMessage />

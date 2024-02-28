@@ -51,7 +51,7 @@ export const TwMainCard = ({
   const IsAdmin = role === "ADMIN"
 
   return (
-    <section className="relative mx-auto flex min-w-64 max-w-[280px] flex-col justify-between border border-black text-xxs sm:max-w-[350px] sm:text-xs dark:border-white">
+    <section className="relative mx-auto flex min-w-72 max-w-[280px] flex-col justify-between border border-black text-xxs sm:max-w-[350px] sm:text-xs dark:border-white">
       <CardHeader
         id={id}
         title={title}
