@@ -20,14 +20,15 @@ Prisma, supabase DB, Vercel
 
 |메인화면|로그인구현|
 |---|---|
-|<img src ='https://github.com/YEONDG/ganda/assets/100520319/4d3d21cd-decd-40ef-957a-982d09b0039d' width='500' height='300' />|<img src ='https://github.com/YEONDG/ganda/assets/100520319/e82d1638-e293-4519-9f97-c190c48cb9d8' width='500' height='300' />|
+|<img src ='https://github.com/YEONDG/ganda/assets/100520319/4d3d21cd-decd-40ef-957a-982d09b0039d' width='400' height='300' />|<img src ='https://github.com/YEONDG/ganda/assets/100520319/e82d1638-e293-4519-9f97-c190c48cb9d8' width='400' height='300' />|
 ||카카오, 구글, 네이버 로그인 구현|
 
 |트위치 메인| 글작성|
 |---|---|
-|<img src ='https://github.com/YEONDG/ganda/assets/100520319/25d135c0-48ee-4f96-9d1d-3a08759d73e5.gif' width='478' height='300' />|<img src ='https://github.com/YEONDG/ganda/assets/100520319/07b1522c-7511-4f33-bc74-a32c0521c88a.gif' width='478' height='300' />|
+|<img src ='https://github.com/YEONDG/ganda/assets/100520319/25d135c0-48ee-4f96-9d1d-3a08759d73e5.gif' width='400' height='300' />|<img src ='https://github.com/YEONDG/ganda/assets/100520319/07b1522c-7511-4f33-bc74-a32c0521c88a.gif' width='400' height='300' />|
 |트위치 메인페이지 페이지네이션| 유효성 검사 |
 
-|좋아요||
+|좋아요|게시글 수정삭제|
 |---|---|
-|<img src ='https://github.com/YEONDG/ganda/assets/100520319/362ee389-fd28-4f90-a840-0412e0952e49.gif' width='450' height='300' />||
+|<img src ='https://github.com/YEONDG/ganda/assets/100520319/362ee389-fd28-4f90-a840-0412e0952e49.gif' width='400' height='300' />|<img src ='https://github.com/YEONDG/ganda/assets/100520319/2dc9d924-9b77-4d4e-b7fe-e7fc1af01d48.gif' width='400' height='300' />|
+|게시글 좋아요|운영자, 게시글 본인만 수정 삭제 가능|
