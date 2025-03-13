@@ -32,7 +32,7 @@
     "clsx": "^2.0.0",
     "lucide-react": "^0.302.0",
     "nanoid": "^5.0.4",
-    "next": "14.0.4",
+    "next": "14.2.24",
     "next-auth": "^4.24.5",
     "next-router-mock": "^0.9.12",
     "next-themes": "^0.2.1",
