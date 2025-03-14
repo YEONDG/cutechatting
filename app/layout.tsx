@@ -19,14 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
   icons: [{ url: "/images/favicon.ico", href: "/images/favicon.ico" }],
-  keywords: [
-    "twitch",
-    "트위치",
-    "afreecatv",
-    "아프리카티비",
-    "치지직",
-    "chzzk",
-  ],
+  keywords: ["twitch", "아스키", "롤", "아스키채팅", "아스키채팅모음"],
   authors: [{ name: "YEONDG" }],
   creator: "YEONDG",
   openGraph: {

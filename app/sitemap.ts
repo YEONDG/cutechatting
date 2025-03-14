@@ -4,39 +4,37 @@ import { db } from "@/lib/db"
 import { absoluteUrl } from "@/lib/utils"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const twitchApprovedPageCount = Math.ceil(
+  const boardApprovedPageCount = Math.ceil(
     (await db.twitchPost.count({
       where: {
         approved: true,
       },
     })) / 6
   )
-  const twitchPageCount = Math.ceil((await db.twitchPost.count()) / 6)
+  const boardPageCount = Math.ceil((await db.twitchPost.count()) / 6)
 
-  const twitchApprovedRoutes = Array.from(
-    { length: twitchApprovedPageCount },
+  const boardApprovedRoutes = Array.from(
+    { length: boardApprovedPageCount },
     (_, index) => index + 1
   ).map((page) => ({
-    url: absoluteUrl(`/twitch?page=${page}`),
+    url: absoluteUrl(`/board?page=${page}`),
     lastModified: new Date().toISOString(),
   }))
 
-  const twitchRoutes = Array.from(
-    { length: twitchPageCount },
+  const boardRoutes = Array.from(
+    { length: boardPageCount },
     (_, index) => index + 1
   ).map((page) => ({
-    url: absoluteUrl(`/twitch/all?page=${page}`),
+    url: absoluteUrl(`/board/all?page=${page}`),
     lastModified: new Date().toISOString(),
   }))
 
   const routes = [
     "",
-    "/twitch",
-    "/twitch/tags",
-    "/twitch/contribute",
-    "/twitch/all",
-    "/chzzk",
-    "/afreeca",
+    "/board",
+    "/board/tags",
+    "/board/contribute",
+    "/board/all",
     "/dashboard",
     "/sign-in",
   ].map((route) => ({
@@ -44,5 +42,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date().toISOString(),
     priority: 1,
   }))
-  return [...routes, ...twitchRoutes, ...twitchApprovedRoutes]
+  return [...routes, ...boardRoutes, ...boardApprovedRoutes]
 }
