@@ -11,6 +11,10 @@ const sidebarNavItems = [
     title: "프로필 수정",
     href: "/dashboard/profile",
   },
+  {
+    title: "회원 탈퇴",
+    href: "/dashboard/delete-account",
+  },
 ]
 export default function DashboardLayout({
   children,

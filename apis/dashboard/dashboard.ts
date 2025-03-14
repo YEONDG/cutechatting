@@ -36,3 +36,18 @@ export const getTotalLikePostsCount = async (userId: string) => {
   const data = await response.json()
   return data
 }
+
+export const deleteAccount = async () => {
+  const response = await fetch("/api/dashboard/delete-account", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`)
+  }
+
+  return response.json()
+}
