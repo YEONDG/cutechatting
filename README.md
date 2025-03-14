@@ -1,4 +1,4 @@
-# 큐트채팅 (CuteChat)
+# 아스키채팅 (AsciiChat)
 
 [![Next.js](https://img.shields.io/badge/Next.js-13.0-black.svg)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
@@ -7,11 +7,11 @@
 
 ## 📌 소개
 
-인터넷 방송 플랫폼에서 사용하는 간단한 텍스트이모티콘 사이트입니다.
+재미있는 아스키 아트 채팅을 한 곳에서 모아보고 공유할 수 있는 커뮤니티 사이트입니다.
 
 ## 🚀 배포 링크
 
-[큐트채팅 바로가기](https://ganda-yeondg.vercel.app/)
+[아스키채팅 바로가기](https://ganda-yeondg.vercel.app/)
 
 ## 🛠 기술 스택
 
