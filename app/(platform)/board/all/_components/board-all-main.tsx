@@ -3,7 +3,7 @@ import { getTotalPostsCount, getTwitchPosts } from "@/apis/twitch/post"
 import { getAuthSession } from "@/lib/auth"
 import { Skeleton } from "@/components/ui/skeleton"
 import { BoardMainCard } from "@/app/(platform)/board/_components/board-main-card"
-import { BoardMainPagenation } from "@/app/(platform)/board/_components/board-main-pagination"
+import { BoardMainPagination } from "@/app/(platform)/board/_components/board-main-pagination"
 
 interface BoardAllMainProps {
   page: string
@@ -38,7 +38,7 @@ export const BoardAllMain = async ({ page }: BoardAllMainProps) => {
         ))}
       </div>
       <div className="p-10">
-        <BoardMainPagenation postsCount={totalPostsCount} url={"/board/all"} />
+        <BoardMainPagination postsCount={totalPostsCount} url={"/board/all"} />
       </div>
     </div>
   )

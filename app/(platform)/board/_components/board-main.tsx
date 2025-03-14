@@ -3,7 +3,7 @@ import { getTotalPostsCount, getTwitchPosts } from "@/apis/twitch/post"
 import { getAuthSession } from "@/lib/auth"
 
 import { BoardMainCard } from "./board-main-card"
-import { BoardMainPagenation } from "./board-main-pagination"
+import { BoardMainPagination } from "./board-main-pagination"
 
 interface BoardMainProps {
   page: string
@@ -41,7 +41,7 @@ export const BoardMain = async ({ page, popular }: BoardMainProps) => {
         ))}
       </div>
       <div className="py-8">
-        <BoardMainPagenation postsCount={totalPostsCount} url={"/board"} />
+        <BoardMainPagination postsCount={totalPostsCount} url={"/board"} />
       </div>
     </div>
   )
