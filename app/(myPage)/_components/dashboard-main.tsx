@@ -2,7 +2,7 @@ import { getLikePosts } from "@/apis/dashboard/dashboard"
 
 import { TwitchPostWithLikesWithTags } from "@/types/types"
 import { Skeleton } from "@/components/ui/skeleton"
-import { TwMainCard } from "@/app/(platform)/twitch/_components/tw-main-card"
+import { TwMainCard } from "@/app/(platform)/twitch/_components/board-main-card"
 
 interface DashboardMainProps {
   userId: string

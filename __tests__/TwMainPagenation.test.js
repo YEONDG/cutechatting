@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
-import { TwMainPagenation } from "@/app/(platform)/twitch/_components/tw-main-pagination"
+import { TwMainPagenation } from "@/app/(platform)/twitch/_components/board-main-pagination"
 
 // next/navigation 모킹
 jest.mock("next/navigation", () => ({
