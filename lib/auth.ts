@@ -14,6 +14,11 @@ export const authOptions: NextAuthOptions = {
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,
       clientSecret: process.env.KAKAO_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "login",
+        },
+      },
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -22,6 +27,11 @@ export const authOptions: NextAuthOptions = {
     NaverProvider({
       clientId: process.env.NAVER_CLIENT_ID!,
       clientSecret: process.env.NAVER_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          auth_type: "reprompt",
+        },
+      },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
