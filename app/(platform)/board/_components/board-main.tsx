@@ -41,7 +41,7 @@ export const BoardMain = async ({ page, popular }: BoardMainProps) => {
         ))}
       </div>
       <div className="py-8">
-        <BoardMainPagenation postsCount={totalPostsCount} url={"/twitch"} />
+        <BoardMainPagenation postsCount={totalPostsCount} url={"/board"} />
       </div>
     </div>
   )

@@ -20,7 +20,7 @@ interface BoardMainPagenationProps {
 
 export const BoardMainPagenation = ({
   postsCount,
-  url = "/twitch",
+  url = "/board",
 }: BoardMainPagenationProps) => {
   const searchParams = useSearchParams()
   const isPopular = searchParams.get("popular") ? true : false

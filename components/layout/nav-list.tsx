@@ -4,9 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 export const navLinks = [
-  { name: "트위치", href: "/twitch" },
-  { name: "치지직", href: "/chzzk" },
-  { name: "아프리카", href: "/afreeca" },
+  { name: "게시판", href: "/board" },
   { name: "대시보드", href: "/dashboard" },
 ]
 

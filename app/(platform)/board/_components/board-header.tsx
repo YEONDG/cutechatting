@@ -28,17 +28,17 @@ export const BoardHeader = () => {
   return (
     <div className="flex flex-wrap gap-2 px-2">
       <Button asChild>
-        <Link href={"/twitch"}>최신순</Link>
+        <Link href={"/board"}>최신순</Link>
       </Button>
       <Button onClick={handleClick}>인기순</Button>
       <Button asChild>
-        <Link href={"/twitch/tags"}>태그</Link>
+        <Link href={"/board/tags"}>태그</Link>
       </Button>
       <Button asChild>
-        <Link href={"/twitch/contribute"}>글쓰기</Link>
+        <Link href={"/board/contribute"}>글쓰기</Link>
       </Button>
       <Button asChild>
-        <Link href={"/twitch/all"}>인증 안된 게시판 가기</Link>
+        <Link href={"/board/all"}>인증 안된 게시판 가기</Link>
       </Button>
     </div>
   )

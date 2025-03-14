@@ -1,6 +1,5 @@
 import { getAuthSession } from "@/lib/auth"
-
-import { BoardForm } from "./_components/board-form"
+import { BoardForm } from "@/app/(platform)/board/contribute/_components/board-form"
 
 const ContributePage = async () => {
   const session = await getAuthSession()

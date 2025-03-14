@@ -2,7 +2,7 @@ import { getLikePosts } from "@/apis/dashboard/dashboard"
 
 import { TwitchPostWithLikesWithTags } from "@/types/types"
 import { Skeleton } from "@/components/ui/skeleton"
-import { TwMainCard } from "@/app/(platform)/twitch/_components/board-main-card"
+import { BoardMainCard } from "@/app/(platform)/board/_components/board-main-card"
 
 interface DashboardMainProps {
   userId: string
@@ -15,7 +15,7 @@ export const DashboardMain = async ({ userId }: DashboardMainProps) => {
   return (
     <div className="flex flex-wrap gap-4">
       {posts?.map((post) => (
-        <TwMainCard
+        <BoardMainCard
           key={post.id}
           id={post.id}
           title={post.title}

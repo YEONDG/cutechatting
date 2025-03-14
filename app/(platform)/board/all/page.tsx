@@ -1,7 +1,7 @@
-import { TwAllHeader } from "./_components/tw-all-header"
-import { TwAllMain } from "./_components/tw-all-main"
+import { BoardAllHeader } from "@/app/(platform)/board/all/_components/board-all-header"
+import { BoardAllMain } from "@/app/(platform)/board/all/_components/board-all-main"
 
-const TwitchAllPage = async ({
+const BoardAllPage = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined }
@@ -9,10 +9,10 @@ const TwitchAllPage = async ({
   const page = searchParams["page"] ?? "1"
   return (
     <div className="mx-auto flex flex-col items-center justify-center gap-5">
-      <TwAllHeader />
-      <TwAllMain page={page} />
+      <BoardAllHeader />
+      <BoardAllMain page={page} />
     </div>
   )
 }
 
-export default TwitchAllPage
+export default BoardAllPage

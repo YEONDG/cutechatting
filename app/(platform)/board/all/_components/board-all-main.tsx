@@ -2,15 +2,14 @@ import { getTotalPostsCount, getTwitchPosts } from "@/apis/twitch/post"
 
 import { getAuthSession } from "@/lib/auth"
 import { Skeleton } from "@/components/ui/skeleton"
+import { BoardMainCard } from "@/app/(platform)/board/_components/board-main-card"
+import { BoardMainPagenation } from "@/app/(platform)/board/_components/board-main-pagination"
 
-import { TwMainCard } from "../../_components/board-main-card"
-import { TwMainPagenation } from "../../_components/board-main-pagination"
-
-interface TwAllMainProps {
+interface BoardAllMainProps {
   page: string
 }
 
-export const TwAllMain = async ({ page }: TwAllMainProps) => {
+export const BoardAllMain = async ({ page }: BoardAllMainProps) => {
   const session = await getAuthSession()
   const userId = session?.user.id
 
@@ -22,7 +21,7 @@ export const TwAllMain = async ({ page }: TwAllMainProps) => {
     <div className="flex flex-col justify-center">
       <div className="grid h-full w-full grid-cols-1 gap-4 px-5 md:grid-cols-2 lg:grid-cols-3 lg:px-0">
         {posts?.map((post) => (
-          <TwMainCard
+          <BoardMainCard
             key={post.id}
             id={post.id}
             title={post.title}
@@ -39,13 +38,13 @@ export const TwAllMain = async ({ page }: TwAllMainProps) => {
         ))}
       </div>
       <div className="p-10">
-        <TwMainPagenation postsCount={totalPostsCount} url={"/twitch/all"} />
+        <BoardMainPagenation postsCount={totalPostsCount} url={"/board/all"} />
       </div>
     </div>
   )
 }
 
-TwAllMain.Skeleton = function TwMainSkeleton() {
+BoardAllMain.Skeleton = function BoardMainSkeleton() {
   return (
     <div className="grid h-full w-full grid-cols-1 gap-4 px-5 md:grid-cols-2 lg:grid-cols-3 lg:px-0">
       <Skeleton className="aspect-video h-[506px] w-[350px]" />

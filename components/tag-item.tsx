@@ -16,7 +16,7 @@ export const TagItem = ({ id, name, count, size }: TagItemProps) => {
   const router = useRouter()
 
   const handleClick = () => {
-    router.push(`/twitch/tags/${id}`)
+    router.push(`/board/tags/${id}`)
   }
   return (
     <Badge
