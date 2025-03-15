@@ -1,10 +1,25 @@
-import Image from "next/image"
+"use client"
+
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { ArrowRight, FileText, Heart, Users } from "lucide-react"
+import { useSession } from "next-auth/react"
 
 import { Button } from "@/components/ui/button"
 
 export default function Home() {
+  const { data: session, status } = useSession()
+  const isAuthenticated = status === "authenticated"
+  const router = useRouter()
+
+  const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if (isAuthenticated) {
+      router.push("/board")
+    } else {
+      router.push("/sign-up")
+    }
+  }
   return (
     <div className="flex flex-col items-center">
       {/* 히어로 섹션 */}
@@ -28,12 +43,12 @@ export default function Home() {
               </Link>
             </Button>
             <Button
-              asChild
+              onClick={handleLoginClick}
               variant="outline"
               size="lg"
               className="rounded-xl border-white text-black hover:bg-white/20 dark:border-indigo-300 dark:text-indigo-100"
             >
-              <Link href="/sign-in">로그인하기</Link>
+              {isAuthenticated ? "게시판으로" : "회원가입하기"}
             </Button>
           </div>
         </div>
@@ -118,11 +133,11 @@ export default function Home() {
           </p>
           <div className="mt-6 flex flex-col gap-4 sm:flex-row">
             <Button
-              asChild
+              onClick={handleLoginClick}
               size="lg"
               className="rounded-xl bg-white text-indigo-600 hover:bg-white/90 dark:bg-indigo-200 dark:text-indigo-800 dark:hover:bg-indigo-300"
             >
-              <Link href="/sign-up">회원가입</Link>
+              {isAuthenticated ? "게시판으로" : "회원가입하기"}
             </Button>
             <Button
               asChild
