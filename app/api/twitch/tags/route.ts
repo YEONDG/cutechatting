@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { Tag } from "@prisma/client"
 
+import { TwitchTagWithPostsWithPostCount } from "@/types/types"
 import { db } from "@/lib/db"
 
 export async function GET(req: Request) {
@@ -11,10 +12,11 @@ export async function GET(req: Request) {
       },
     })
 
-    const twitchTagsWithPostCount = twitchTags.map((tag: Tag) => ({
-      ...tag,
-      postCount: tag.posts.length,
-    }))
+    const twitchTagsWithPostCount: TwitchTagWithPostsWithPostCount[] =
+      twitchTags.map((tag) => ({
+        ...tag,
+        postCount: tag.posts?.length,
+      }))
 
     return NextResponse.json(twitchTagsWithPostCount)
   } catch (error) {

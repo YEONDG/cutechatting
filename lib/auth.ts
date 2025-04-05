@@ -2,6 +2,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { nanoid } from "nanoid"
 import { getServerSession, NextAuthOptions } from "next-auth"
 import { Adapter } from "next-auth/adapters"
+import { JWT } from "next-auth/jwt"
 import GoogleProvider from "next-auth/providers/google"
 import KakaoProvider from "next-auth/providers/kakao"
 import NaverProvider from "next-auth/providers/naver"
@@ -63,13 +64,14 @@ export const authOptions: NextAuthOptions = {
       }
 
       return {
+        ...token,
         id: dbUser.id,
         name: dbUser.name,
         email: dbUser.email,
         picture: dbUser.image,
         username: dbUser.username,
         role: dbUser.role,
-      }
+      } as JWT
     },
     async session({ token, session }) {
       if (token) {

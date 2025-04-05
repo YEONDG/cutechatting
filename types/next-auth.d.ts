@@ -9,6 +9,7 @@ declare module "next-auth/jwt" {
     id: UserId
     username: string
     role: UserRole
+    picture?: string | null
   }
 }
 
