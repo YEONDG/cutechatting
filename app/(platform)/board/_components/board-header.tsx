@@ -37,52 +37,55 @@ export const BoardHeader = () => {
 
   // 공통 링크 스타일
   const linkBaseStyle =
-    "text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:bg-gray-300 px-4 py-2"
-  const activeLinkStyle = "font-semibold text-blue-600 dark:text-blue-400"
+    "text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:bg-gray-300 px-4 py-2 rounded-xl"
+  const activeLinkStyle =
+    "font-bold text-blue-600  dark:text-blue-300 bg-red-300 rounded-xl"
 
   return (
     <div
-      className="sticky top-14 z-20 flex w-full flex-wrap items-center border-b
-                 border-gray-200 bg-white px-2 py-2
+      className="sticky top-14 z-20 flex w-full max-w-3xl  border-b
+                 border-gray-200 bg-stone-200 px-2 py-2
                  sm:gap-6 sm:px-6 dark:border-gray-700 dark:bg-gray-800"
     >
-      <Link
-        href={`/board?${latestQueryString}`}
-        className={`${linkBaseStyle} ${isActiveLatest ? activeLinkStyle : ""}`}
-      >
-        최신순
-      </Link>
-
-      <Link href={`${pathname}?${popularQueryString}`}>
-        <Button
-          variant={isActivePopular ? "secondary" : "ghost"}
-          size="sm" // 버튼 크기 조절
-          className={isActivePopular ? activeLinkStyle : linkBaseStyle}
+      <div className="flex w-full flex-wrap items-center sm:gap-2">
+        <Link
+          href={`/board?${latestQueryString}`}
+          className={`${linkBaseStyle} ${isActiveLatest ? activeLinkStyle : ""}`}
         >
-          인기순
-        </Button>
-      </Link>
+          최신순
+        </Link>
 
-      <Link
-        href={"/board/tags"}
-        className={`${linkBaseStyle} ${isActiveTags ? activeLinkStyle : ""}`}
-      >
-        태그
-      </Link>
+        <Link href={`${pathname}?${popularQueryString}`}>
+          <Button
+            variant={isActivePopular ? "secondary" : "ghost"}
+            size="sm"
+            className={isActivePopular ? activeLinkStyle : linkBaseStyle}
+          >
+            인기순
+          </Button>
+        </Link>
 
-      <Link
-        href={"/board/contribute"}
-        className={`${linkBaseStyle} ${isActiveContribute ? activeLinkStyle : ""}`}
-      >
-        글쓰기
-      </Link>
+        <Link
+          href={"/board/tags"}
+          className={`${linkBaseStyle} ${isActiveTags ? activeLinkStyle : ""}`}
+        >
+          태그
+        </Link>
 
-      <Link
-        href={"/board/all"}
-        className={`${linkBaseStyle} ${isActiveAll ? activeLinkStyle : ""}`}
-      >
-        인증 안된 게시판
-      </Link>
+        <Link
+          href={"/board/contribute"}
+          className={`${linkBaseStyle} ${isActiveContribute ? activeLinkStyle : ""}`}
+        >
+          글쓰기
+        </Link>
+
+        <Link
+          href={"/board/all"}
+          className={`${linkBaseStyle} ${isActiveAll ? activeLinkStyle : ""}`}
+        >
+          비인증 게시판
+        </Link>
+      </div>
     </div>
   )
 }
