@@ -61,15 +61,15 @@ export default async function RootLayout({
     <html lang="ko">
       <body
         className={`${noto_sans.className} antialiased`}
-        suppressHydrationWarning={true}
+        suppressHydrationWarning
       >
-        <Providers>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Providers>
             <div className="mx-auto flex h-full w-full flex-col justify-center sm:items-center">
               <Navbar />
               <main className="flex h-full max-w-7xl flex-col pb-20 pt-20">
@@ -79,8 +79,8 @@ export default async function RootLayout({
             </div>
             <Analytics />
             <SpeedInsights />
-          </ThemeProvider>
-        </Providers>
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   )
