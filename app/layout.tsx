@@ -72,7 +72,7 @@ export default async function RootLayout({
           <Providers>
             <div className="mx-auto flex h-full w-full flex-col justify-center sm:items-center">
               <Navbar />
-              <main className="flex h-full max-w-7xl flex-col pb-20 pt-20">
+              <main className="flex h-full max-w-7xl flex-col pb-20 pt-16">
                 {children}
               </main>
               <Toaster richColors />

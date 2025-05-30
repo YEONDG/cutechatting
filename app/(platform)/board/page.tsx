@@ -11,7 +11,7 @@ const BoardPage = async ({
   const popular = searchParams["popular"] === "true"
 
   return (
-    <div className="relative flex flex-col items-center justify-center gap-4">
+    <div className="relative flex flex-col items-center  gap-4">
       <BoardHeader />
       <BoardMain page={page} popular={popular} />
     </div>

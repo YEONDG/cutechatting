@@ -39,7 +39,7 @@ export const BoardHeader = () => {
   const linkBaseStyle =
     "text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:bg-gray-300 px-4 py-2 rounded-xl"
   const activeLinkStyle =
-    "font-bold text-blue-600  dark:text-blue-300 bg-red-300 rounded-xl"
+    "font-bold text-blue-600 bg-red-300 rounded-xl dark:text-blue-600"
 
   return (
     <div
