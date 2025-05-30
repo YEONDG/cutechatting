@@ -16,15 +16,16 @@ import {
 interface BoardMainPaginationProps {
   postsCount: number
   url?: string
+  page: string
+  isPopularPage: boolean
 }
 
 export const BoardMainPagination = ({
   postsCount,
   url = "/board",
+  page,
+  isPopularPage,
 }: BoardMainPaginationProps) => {
-  const searchParams = useSearchParams()
-  const isPopular = searchParams.get("popular") ? true : false
-  const page = searchParams.get("page") ?? "1"
   const pageNumber = Number(page)
   const totalPage = Math.ceil(postsCount / 6)
 
@@ -43,16 +44,16 @@ export const BoardMainPagination = ({
           <Button variant="ghost" disabled={!hasPrevPage}>
             <PaginationPrevious
               href={`${url}?page=${pageNumber - 1}${
-                isPopular ? "&popular=true" : ""
+                isPopularPage ? "&popular=true" : ""
               }`}
             />
           </Button>
         </PaginationItem>
-        
+
         <PageNumbers
           totalPage={totalPage}
           currentPage={pageNumber}
-          isPopular={isPopular}
+          isPopular={isPopularPage}
           url={url}
         />
 
@@ -60,7 +61,7 @@ export const BoardMainPagination = ({
           <Button variant="ghost" disabled={!hasNextPage}>
             <PaginationNext
               href={`${url}?page=${pageNumber + 1}${
-                isPopular ? "&popular=true" : ""
+                isPopularPage ? "&popular=true" : ""
               }`}
             />
           </Button>
@@ -82,14 +83,12 @@ const PageNumber = ({
   isPopular: boolean
   url: string
 }) => (
-  <PaginationItem>
-    <PaginationLink
-      href={`${url}?page=${page}${isPopular ? "&popular=true" : ""}`}
-      isActive={isActive}
-    >
-      {page}
-    </PaginationLink>
-  </PaginationItem>
+  <PaginationLink
+    href={`${url}?page=${page}${isPopular ? "&popular=true" : ""}`}
+    isActive={isActive}
+  >
+    {page}
+  </PaginationLink>
 )
 
 // 페이지 번호 목록 컴포넌트
@@ -105,13 +104,13 @@ const PageNumbers = ({
   url: string
 }) => {
   // 페이지가 없는 경우 빈 배열 반환
-  if (totalPage <= 0) return null;
-  
-  const pages = [];
+  if (totalPage <= 0) return null
+
+  const pages = []
 
   // 현재 페이지 주변 페이지 계산
-  const startPage = Math.max(2, currentPage - 1);
-  const endPage = Math.min(totalPage - 1, currentPage + 1);
+  const startPage = Math.max(2, currentPage - 1)
+  const endPage = Math.min(totalPage - 1, currentPage + 1)
 
   // 첫 페이지 추가
   pages.push(
@@ -122,7 +121,7 @@ const PageNumbers = ({
       isPopular={isPopular}
       url={url}
     />
-  );
+  )
 
   // 시작 페이지가 3 이상이면 줄임표 추가
   if (startPage > 2) {
@@ -130,7 +129,7 @@ const PageNumbers = ({
       <PaginationItem key="ellipsis-1">
         <PaginationEllipsis />
       </PaginationItem>
-    );
+    )
   }
 
   // 중간 페이지들 추가
@@ -143,7 +142,7 @@ const PageNumbers = ({
         isPopular={isPopular}
         url={url}
       />
-    );
+    )
   }
 
   // 끝 페이지가 totalPage-1보다 작으면 줄임표 추가
@@ -152,7 +151,7 @@ const PageNumbers = ({
       <PaginationItem key="ellipsis-2">
         <PaginationEllipsis />
       </PaginationItem>
-    );
+    )
   }
 
   // 마지막 페이지가 1이 아니면 추가
@@ -165,8 +164,8 @@ const PageNumbers = ({
         isPopular={isPopular}
         url={url}
       />
-    );
+    )
   }
 
-  return pages;
+  return pages
 }

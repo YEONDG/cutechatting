@@ -41,7 +41,12 @@ export const BoardMain = async ({ page, popular }: BoardMainProps) => {
         ))}
       </ul>
       <div className="py-8">
-        <BoardMainPagination postsCount={totalPostsCount} url={"/board"} />
+        <BoardMainPagination
+          postsCount={totalPostsCount}
+          url={"/board"}
+          page={page}
+          isPopularPage={popular}
+        />
       </div>
     </div>
   )
