@@ -17,14 +17,14 @@ interface BoardMainPaginationProps {
   postsCount: number
   url?: string
   page: string
-  isPopularPage: boolean
+  isPopularPage?: boolean
 }
 
 export const BoardMainPagination = ({
   postsCount,
   url = "/board",
   page,
-  isPopularPage,
+  isPopularPage = false,
 }: BoardMainPaginationProps) => {
   const pageNumber = Number(page)
   const totalPage = Math.ceil(postsCount / 6)

@@ -38,7 +38,11 @@ export const BoardAllMain = async ({ page }: BoardAllMainProps) => {
         ))}
       </div>
       <div className="p-10">
-        <BoardMainPagination postsCount={totalPostsCount} url={"/board/all"} />
+        <BoardMainPagination
+          postsCount={totalPostsCount}
+          url={"/board/all"}
+          page={page}
+        />
       </div>
     </div>
   )
