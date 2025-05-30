@@ -22,7 +22,7 @@ export const BoardMain = async ({ page, popular }: BoardMainProps) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      <div className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 lg:px-0">
+      <ul className="grid h-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 lg:px-0">
         {posts?.map((post) => (
           <BoardMainCard
             key={post.id}
@@ -39,7 +39,7 @@ export const BoardMain = async ({ page, popular }: BoardMainProps) => {
             role={session?.user.role}
           />
         ))}
-      </div>
+      </ul>
       <div className="py-8">
         <BoardMainPagination postsCount={totalPostsCount} url={"/board"} />
       </div>

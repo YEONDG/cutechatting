@@ -32,13 +32,13 @@ interface BoardMainCardProps {
 export const BoardMainCard = ({
   id,
   title,
-  content,
+  content = "",
   authorId,
   userId,
   createdAt,
   likes = [],
   tags = [],
-  username,
+  username = "",
   approved,
   role = "USER",
 }: BoardMainCardProps) => {
@@ -51,55 +51,66 @@ export const BoardMainCard = ({
   const IsAdmin = role === "ADMIN"
 
   return (
-    <section className="relative mx-auto flex min-w-72 max-w-[280px] flex-col justify-between border border-black text-xxs sm:max-w-[350px] sm:text-xs dark:border-white">
-      <CardHeader
-        id={id}
-        title={title}
-        username={username ?? ""}
-        createdDate={createdDate}
-        approved={approved}
-      />
-      <div className="absolute right-2 top-2">
-        <LikeButton
-          isLiked={isLiked}
-          likeCount={likeCount}
-          onLikeClick={toggleLike}
+    <li className="relative mx-auto flex w-full min-w-72 max-w-[280px] flex-col justify-between border border-black text-xxs sm:max-w-[350px] sm:text-xs dark:border-white">
+      {/* 상단 */}
+      <div>
+        <CardHeader
+          id={id}
+          title={title}
+          username={username}
+          createdDate={createdDate}
+          approved={approved}
         />
+        <div className="absolute right-2 top-2">
+          <LikeButton
+            isLiked={isLiked}
+            likeCount={likeCount}
+            onLikeClick={toggleLike}
+          />
+        </div>
+        <Separator className="mb-2" />
       </div>
-      <Separator className="mb-2" />
-      <CardContent content={content} />
-      <TagDisplay tags={tags} />
-      <Separator />
-      <div className="mx-2 my-2 flex items-center justify-between gap-2">
-        <div className="flex">
-          <CopyToClipboard text={content ?? ""} onCopy={onCopySuccess}>
-            <Button variant="default" className="h-8 w-24">
-              <ClipboardCopy />
-              Copy
-            </Button>
-          </CopyToClipboard>
-          {copy && (
-            <p className="flex text-xl">
-              <Check className="h-8 w-8 text-green-500" />
-              복사완료
-            </p>
+
+      {/* 가운데 컨텐츠 영역 */}
+      <div className="flex h-full flex-col justify-between">
+        <CardContent content={content} />
+        <TagDisplay tags={tags} />
+      </div>
+
+      {/* 하단 */}
+      <div>
+        <Separator />
+        <div className="mx-2 my-2 flex items-center justify-between gap-2">
+          <div className="flex">
+            <CopyToClipboard text={content} onCopy={onCopySuccess}>
+              <Button variant="default" className="h-8 w-24">
+                <ClipboardCopy />
+                Copy
+              </Button>
+            </CopyToClipboard>
+            {copy && (
+              <p className="flex items-center gap-1 text-xl">
+                <Check className="h-8 w-8 text-green-500" />
+                복사완료
+              </p>
+            )}
+          </div>
+
+          {(IsAuthor || IsAdmin) && (
+            <div className="flex gap-2">
+              <CardEditBtn
+                postId={id}
+                title={title}
+                content={content}
+                tags={tags}
+                userId={userId}
+              />
+
+              <CardDeleteBtn postId={id} />
+            </div>
           )}
         </div>
-
-        {(IsAuthor || IsAdmin) && (
-          <div className="flex gap-2">
-            <CardEditBtn
-              postId={id}
-              title={title}
-              content={content}
-              tags={tags}
-              userId={userId}
-            />
-
-            <CardDeleteBtn postId={id} />
-          </div>
-        )}
       </div>
-    </section>
+    </li>
   )
 }
