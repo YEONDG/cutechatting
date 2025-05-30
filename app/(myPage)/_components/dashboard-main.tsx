@@ -13,7 +13,7 @@ export const DashboardMain = async ({ userId }: DashboardMainProps) => {
   const posts: TwitchPostWithLikesWithTags[] = await getLikePosts(userId)
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="grid grid-cols-1 gap-4 px-4 pb-10 lg:grid-cols-2 xl:grid-cols-3">
       {posts?.map((post) => (
         <BoardMainCard
           key={post.id}

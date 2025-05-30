@@ -22,14 +22,13 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <section className="w-full px-2">
-      <h2 className="text-3xl">대시보드</h2>
+    <section className="relative w-full px-10">
+      <h2 className="text-3xl font-bold tracking-tight">대시보드</h2>
       <Separator className="my-4" />
-      <div className="flex w-screen max-w-7xl flex-col lg:flex-row lg:space-x-12 lg:space-y-0">
-        <aside className="-mx-4 lg:w-1/5">
-          <SidebarNav items={sidebarNavItems} />
-        </aside>
-        <div className="flex-1 lg:w-4/5 ">{children}</div>
+      <div className="flex max-w-7xl flex-col lg:flex-row lg:space-x-12 lg:space-y-0">
+        <SidebarNav items={sidebarNavItems} />
+
+        <div className="flex-1">{children}</div>
       </div>
     </section>
   )

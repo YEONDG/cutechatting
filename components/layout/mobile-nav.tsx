@@ -24,7 +24,7 @@ export const MobileNav = () => {
         </div>
       </SheetTrigger>
       <SheetContent side="right" className="pl-0">
-        <div className="mr-5 flex h-full flex-col items-end justify-center gap-10 text-5xl">
+        <div className="mr-5 flex h-full flex-col items-end justify-center gap-10 text-3xl">
           {navLinks.map((link) => (
             <MobileLink key={link.href} href={link.href} onOpenChange={setOpen}>
               {link.name}
